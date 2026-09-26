@@ -1,0 +1,27 @@
+:root{
+/* --- Base palette: sampled from the ETK roundel, ttSport lettering and factory renders --- */
+--etk-orange-900:#8f3f00;--etk-orange-700:#c45600;--etk-orange-600:#f86e00;--etk-orange-500:#ff8321;--etk-orange-300:#ffb375;--etk-orange-100:#ffe7d3;
+--etk-blue-900:#000630;--etk-blue-800:#000a48;--etk-blue-600:#0d2a8c;--etk-blue-300:#8fa3d8;--etk-blue-100:#e3e8f6;
+
+/* Graphite neutrals — the body of the brand */
+--etk-black:#0b0c0d;--etk-graphite-900:#141618;--etk-graphite-800:#1c1f22;--etk-graphite-700:#2a2e33;--etk-graphite-600:#3d4248;--etk-graphite-500:#5a6066;--etk-graphite-400:#878d93;--etk-graphite-300:#b3b8bd;--etk-graphite-200:#d6d9dc;--etk-graphite-100:#e9ebec;--etk-graphite-050:#f4f5f6;--etk-white:#ffffff;
+
+/* Silver — badge / trim metal, from the ttSport boot lid */
+--etk-silver-600:#7e8078;--etk-silver-500:#a8a8a0;--etk-silver-300:#c9c9c2;--etk-silver-100:#eceae5;
+
+/* Status */
+--etk-green:#2f7d4f;--etk-amber:#c98a00;--etk-red:#b3261e;
+
+/* --- Semantic aliases: light (showroom) --- */
+--text-strong:var(--etk-black);--text-body:var(--etk-graphite-700);--text-muted:var(--etk-graphite-500);--text-inverse:var(--etk-white);--text-accent:var(--etk-orange-700);--text-link:var(--etk-orange-700);--text-link-hover:var(--etk-orange-900);
+--surface-page:var(--etk-white);--surface-sunken:var(--etk-graphite-050);--surface-card:var(--etk-white);--surface-raised:var(--etk-white);--surface-inverse:var(--etk-graphite-900);--surface-accent:var(--etk-orange-600);--surface-ttsport:var(--etk-blue-800);
+--border-hairline:var(--etk-graphite-200);--border-strong:var(--etk-graphite-600);--border-accent:var(--etk-orange-600);--border-focus:var(--etk-orange-600);
+--signal-accent:var(--etk-orange-600);--signal-accent-hover:var(--etk-orange-700);--signal-accent-press:var(--etk-orange-900);
+--status-ok:var(--etk-green);--status-warn:var(--etk-amber);--status-fault:var(--etk-red);
+}
+/* --- Semantic aliases: dark (cockpit / night showroom). Apply to any container. --- */
+.etk-dark,[data-theme="dark"]{
+--text-strong:var(--etk-white);--text-body:var(--etk-graphite-200);--text-muted:var(--etk-graphite-400);--text-inverse:var(--etk-black);--text-accent:var(--etk-orange-500);--text-link:var(--etk-orange-500);--text-link-hover:var(--etk-orange-300);
+--surface-page:var(--etk-black);--surface-sunken:#08090a;--surface-card:var(--etk-graphite-900);--surface-raised:var(--etk-graphite-800);--surface-inverse:var(--etk-white);
+--border-hairline:var(--etk-graphite-700);--border-strong:var(--etk-graphite-500);
+}

@@ -1,0 +1,2224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ETK — Official website</title>
+<link rel="stylesheet" href="_ds/etk-design-system-ae95b3a5-7f53-437a-af63-65ccf182192f/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/etk-design-system-ae95b3a5-7f53-437a-af63-65ccf182192f/tokens/colors.css">
+<link rel="stylesheet" href="_ds/etk-design-system-ae95b3a5-7f53-437a-af63-65ccf182192f/tokens/typography.css">
+<link rel="stylesheet" href="_ds/etk-design-system-ae95b3a5-7f53-437a-af63-65ccf182192f/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/etk-design-system-ae95b3a5-7f53-437a-af63-65ccf182192f/tokens/shape.css">
+<link rel="stylesheet" href="_ds/etk-design-system-ae95b3a5-7f53-437a-af63-65ccf182192f/tokens/motion.css">
+<link rel="stylesheet" href="_ds/etk-design-system-ae95b3a5-7f53-437a-af63-65ccf182192f/tokens/base.css">
+<link rel="stylesheet" href="_ds/etk-design-system-ae95b3a5-7f53-437a-af63-65ccf182192f/styles.css">
+<script src="_ds/etk-design-system-ae95b3a5-7f53-437a-af63-65ccf182192f/_ds_bundle.js"></script>
+<style>
+:root{
+--m-blue:#0066b1;--m-violet:#6e2c8f;--m-red:#e10e23;
+--m-stripe:linear-gradient(90deg,#0066b1 0 33.34%,#6e2c8f 0 66.67%,#e10e23 66.67%);
+--etk-orange-600:#0066b1;--etk-orange-700:#00528e;--etk-orange-900:#003a66;--etk-orange-500:#2a85c8;--etk-orange-300:#9cc7e6;--etk-orange-100:#e3f0f9;
+--etk-blue-800:#0c1526;--etk-blue-900:#070c16;--etk-blue-600:#173157;
+}
+html,body{margin:0;padding:0;background:#fff;}
+body{font-family:var(--font-core);color:var(--text-body);}
+a{color:var(--text-link);text-decoration:none;}
+a:hover{color:var(--text-link-hover);}
+*{box-sizing:border-box;}
+</style>
+</helmet>
+
+<div style="font-family:var(--font-core);color:var(--text-body);background:#fff;min-height:100vh;">
+
+<header style="position:sticky;top:0;z-index:60;height:72px;display:flex;align-items:center;gap:32px;padding:0 32px;background:{{ hdrBg }};backdrop-filter:blur(12px);border-bottom:1px solid {{ hdrBorder }};">
+  <a href="#" onClick="{{ goHome }}" aria-label="ETK — home" style="display:flex;align-items:center;flex:0 0 auto;">
+    <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Logo" base="." variant="{{ logoVariant }}" height="{{ n30 }}" hint-size="40px,30px"></x-import>
+  </a>
+  <sc-if value="{{ navInline }}" hint-placeholder-val="{{ true }}">
+    <nav style="display:flex;gap:22px;min-width:0;align-items:center;">
+      <a href="#" onClick="{{ goRange }}" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;padding-bottom:2px;white-space:nowrap;color:{{ cRange }};box-shadow:{{ rRange }};">Models</a>
+      <a href="#" onClick="{{ goTt }}" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;padding-bottom:2px;white-space:nowrap;color:{{ cTt }};box-shadow:{{ rTt }};">ttSport</a>
+      <a href="#" onClick="{{ goSpecials }}" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;padding-bottom:2px;white-space:nowrap;color:{{ cSpecials }};box-shadow:{{ rSpecials }};">Special vehicles</a>
+      <a href="#" onClick="{{ goHeritage }}" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;padding-bottom:2px;white-space:nowrap;color:{{ cHeritage }};box-shadow:{{ rHeritage }};">Heritage</a>
+      <a href="#" onClick="{{ goMotorsport }}" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;padding-bottom:2px;white-space:nowrap;color:{{ cMotorsport }};box-shadow:{{ rMotorsport }};">Motorsport</a>
+    </nav>
+  </sc-if>
+  <div style="display:flex;align-items:center;gap:8px;flex:0 0 auto;margin-left:auto;">
+    <x-import component-from-global-scope="ETKDesignSystem_ae95b3.IconButton" label="Find a partner" size="sm" onClick="{{ goDealers }}" hint-size="32px,32px">
+      <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Icon" name="map-pin" hint-size="20px,20px"></x-import>
+    </x-import>
+    <div style="position:relative;display:flex;">
+      <x-import component-from-global-scope="ETKDesignSystem_ae95b3.IconButton" label="Webshop" size="sm" onClick="{{ goShop }}" hint-size="32px,32px">
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Icon" name="shopping-bag" hint-size="20px,20px"></x-import>
+      </x-import>
+      <sc-if value="{{ hasCart }}" hint-placeholder-val="{{ false }}">
+        <span style="position:absolute;top:-4px;right:-4px;min-width:16px;height:16px;padding:0 4px;display:flex;align-items:center;justify-content:center;background:var(--m-blue);color:#fff;border-radius:999px;font-size:10px;font-weight:700;font-variant-numeric:tabular-nums;pointer-events:none;">{{ cartCount }}</span>
+      </sc-if>
+    </div>
+    <sc-if value="{{ loggedOut }}" hint-placeholder-val="{{ true }}">
+      <x-import component-from-global-scope="ETKDesignSystem_ae95b3.IconButton" label="Log in" size="sm" onClick="{{ goAccount }}" hint-size="32px,32px">
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Icon" name="user" hint-size="20px,20px"></x-import>
+      </x-import>
+    </sc-if>
+    <sc-if value="{{ loggedIn }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ goAccount }}" aria-label="My ETK" title="My ETK" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:var(--m-blue);color:#fff;border:none;border-radius:2px;cursor:pointer;font-family:var(--font-core);font-size:12px;font-weight:700;letter-spacing:0.04em;">{{ initials }}</button>
+    </sc-if>
+    <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" size="sm" onClick="{{ goConfig }}" hint-size="120px,32px">Build yours</x-import>
+    <sc-if value="{{ navBurger }}" hint-placeholder-val="{{ false }}">
+      <button onClick="{{ toggleMenu }}" aria-label="Menu" style="width:36px;height:36px;margin-left:4px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;background:none;border:1px solid {{ hdrBorder }};cursor:pointer;padding:0;">
+        <span style="width:16px;height:2px;display:block;background:{{ burgerInk }};"></span>
+        <span style="width:16px;height:2px;display:block;background:{{ burgerInk }};"></span>
+        <span style="width:16px;height:2px;display:block;background:{{ burgerInk }};"></span>
+      </button>
+    </sc-if>
+  </div>
+  <div style="position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--m-stripe);"></div>
+</header>
+
+<sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+<div onClick="{{ closeMenu }}" style="position:fixed;inset:0;z-index:65;background:rgba(11,12,13,0.32);"></div>
+<aside style="position:fixed;top:0;right:0;bottom:0;z-index:70;width:min(340px,86vw);background:var(--surface-card);border-left:1px solid var(--border-hairline);box-shadow:0 8px 28px rgba(11,12,13,.18);display:flex;flex-direction:column;">
+  <div style="height:4px;background:var(--m-stripe);"></div>
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px;border-bottom:1px solid var(--border-hairline);">
+    <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Menu</div>
+    <button onClick="{{ closeMenu }}" aria-label="Close menu" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:none;border:1px solid var(--border-hairline);cursor:pointer;font-size:16px;line-height:1;color:var(--text-strong);font-family:var(--font-core);">×</button>
+  </div>
+  <nav style="display:flex;flex-direction:column;padding:8px 0;">
+    <a href="#" onClick="{{ goRange }}" style="display:flex;align-items:center;min-height:52px;padding:0 24px;font-size:17px;font-weight:700;letter-spacing:-0.008em;color:var(--text-strong);border-left:2px solid {{ eRange }};">Models</a>
+    <a href="#" onClick="{{ goTt }}" style="display:flex;align-items:center;min-height:52px;padding:0 24px;font-size:17px;font-weight:700;letter-spacing:-0.008em;color:var(--text-strong);border-left:2px solid {{ eTt }};">ttSport</a>
+    <a href="#" onClick="{{ goSpecials }}" style="display:flex;align-items:center;min-height:52px;padding:0 24px;font-size:17px;font-weight:700;letter-spacing:-0.008em;color:var(--text-strong);border-left:2px solid {{ eSpecials }};">Special vehicles</a>
+    <a href="#" onClick="{{ goHeritage }}" style="display:flex;align-items:center;min-height:52px;padding:0 24px;font-size:17px;font-weight:700;letter-spacing:-0.008em;color:var(--text-strong);border-left:2px solid {{ eHeritage }};">Heritage</a>
+    <a href="#" onClick="{{ goMotorsport }}" style="display:flex;align-items:center;min-height:52px;padding:0 24px;font-size:17px;font-weight:700;letter-spacing:-0.008em;color:var(--text-strong);border-left:2px solid {{ eMotorsport }};">Motorsport</a>
+  </nav>
+  <div style="margin-top:auto;border-top:1px solid var(--border-hairline);padding:16px 24px 24px;display:flex;flex-direction:column;gap:14px;">
+    <a href="#" onClick="{{ goDealers }}" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:var(--text-body);">Find a partner</a>
+    <a href="#" onClick="{{ goShop }}" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:var(--text-body);">Webshop</a>
+    <a href="#" onClick="{{ goJobs }}" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:var(--text-body);">Careers</a>
+    <a href="#" onClick="{{ goAccount }}" style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:var(--text-body);">{{ accountLabel }}</a>
+    <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" block="true" onClick="{{ goConfig }}" hint-size="100%,40px">Build yours</x-import>
+  </div>
+</aside>
+</sc-if>
+
+<sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+<main>
+  <section style="position:relative;height:600px;overflow:hidden;background:var(--etk-black);">
+    {{ heroLayers }}
+    <div style="position:relative;height:100%;max-width:1280px;margin:0 auto;padding:0 48px;display:flex;flex-direction:column;justify-content:center;">
+      <div style="max-width:600px;">
+        <div style="width:64px;height:4px;background:var(--m-stripe);"></div>
+        <div style="margin-top:16px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#fff;">{{ heroEyebrow }}</div>
+        <h1 style="margin:20px 0 0;font-size:58px;line-height:1.0;letter-spacing:-0.025em;font-weight:800;color:#fff;text-wrap:pretty;">{{ heroTitle }}</h1>
+        <p style="margin:18px 0 0;font-size:17px;line-height:1.6;max-width:46ch;color:rgba(255,255,255,0.86);">{{ heroText }}</p>
+        <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;">
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" size="lg" onClick="{{ heroGo }}" hint-size="150px,48px">{{ heroCta }}</x-import>
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" size="lg" variant="secondary" onClick="{{ goConfig }}" hint-size="150px,48px">Build yours</x-import>
+        </div>
+      </div>
+      <div style="position:absolute;bottom:32px;left:48px;display:flex;gap:8px;align-items:center;">
+        <sc-for list="{{ heroDots }}" as="d" hint-placeholder-count="3">
+          <button onClick="{{ d.go }}" style="width:44px;height:3px;border:none;padding:0;cursor:pointer;background:{{ d.bg }};"></button>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:96px 48px;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;">
+      <div>
+        <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+        <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">The range</div>
+        <h2 style="margin:20px 0 0;font-size:40px;line-height:1.05;letter-spacing:-0.022em;font-weight:800;color:var(--text-strong);">Fourteen families. Sixty-two trims.</h2>
+        <p style="margin:14px 0 0;font-size:16px;line-height:1.6;max-width:58ch;">Five series, from the 800 and K-Series on the aluminium-intensive platform to the 900, 1300 Touring and the S-Series flagship. Every trim is listed with the figures it leaves the line with.</p>
+      </div>
+      <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" variant="secondary" onClick="{{ goRange }}" hint-size="150px,40px">All trims</x-import>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:24px;margin-top:48px;">
+      <sc-for list="{{ featured }}" as="m" hint-placeholder-count="4">
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.VehicleCard" image="{{ m.img }}" code="{{ m.code }}" name="{{ m.name }}" spec="{{ m.spec }}" price="{{ m.price }}" badge="{{ m.badge }}" onClick="{{ m.onClick }}" hint-size="100%,300px"></x-import>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="position:relative;height:460px;overflow:hidden;background:var(--etk-black);">
+    <img src="assets/promo/touring-pass.webp" alt="800-Series Touring on a country road" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,12,13,.82) 0%,rgba(11,12,13,.45) 48%,rgba(11,12,13,.05) 78%);"></div>
+    <div style="position:relative;height:100%;max-width:1280px;margin:0 auto;padding:0 48px;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:56px;">
+      <div style="width:48px;height:4px;background:var(--m-stripe);"></div>
+      <div style="margin-top:14px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#fff;">846 Touring</div>
+      <h2 style="margin:16px 0 0;font-size:40px;line-height:1.05;letter-spacing:-0.022em;font-weight:800;color:#fff;max-width:20ch;">The estate was engineered first.</h2>
+      <p style="margin:14px 0 0;font-size:17px;line-height:1.6;max-width:44ch;color:#fff;">The Touring shell was signed off before the saloon. Torsional stiffness is 28 000 N·m per degree with the tailgate closed.</p>
+    </div>
+  </section>
+
+  <section style="background:var(--etk-blue-800);color:#fff;padding:96px 0;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:64px;align-items:center;">
+      <div>
+        <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+        <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#fff;">The performance division</div>
+        <h2 style="margin:20px 0 0;font-size:44px;line-height:1.02;letter-spacing:-0.022em;font-weight:800;color:#fff;">ttSport builds the version the engineers keep.</h2>
+        <p style="margin:18px 0 0;font-size:17px;line-height:1.6;max-width:48ch;color:rgba(255,255,255,0.82);">The suffix is applied to a model code and never sold on its own. A ttSport car leaves the line with a seven-speed ttSport automatic, a widened track and three drive maps above Sport.</p>
+        <div style="display:flex;gap:48px;margin-top:40px;flex-wrap:wrap;">
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecFigure" label="Power" value="604" unit="PS" inverse="true" hint-size="auto,62px"></x-import>
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecFigure" label="Torque" value="708" unit="N·m" inverse="true" hint-size="auto,62px"></x-import>
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecFigure" label="Top speed" value="330" unit="km/h" inverse="true" hint-size="auto,62px"></x-import>
+        </div>
+        <div style="margin-top:40px;">
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" size="lg" onClick="{{ goTt }}" hint-size="160px,48px">Explore ttSport</x-import>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <img src="assets/promo/motorsport-front.webp" alt="ETK Motorsport coupé" style="width:100%;display:block;">
+        <div style="background:#fff;padding:16px 24px;">
+          <img src="assets/logo/ttsport-lettering.jpg" alt="ttSport" style="width:100%;max-width:320px;display:block;margin:0 auto;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:96px 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:64px;align-items:center;">
+    <img src="assets/promo/bronze-coupe.webp" alt="Heritage livery coupé" style="width:100%;display:block;">
+    <div>
+      <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+      <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Heritage</div>
+      <h2 style="margin:20px 0 0;font-size:40px;line-height:1.05;letter-spacing:-0.022em;font-weight:800;color:var(--text-strong);">We have built cars in this hall since 1953.</h2>
+      <p style="margin:18px 0 0;font-size:16px;line-height:1.6;max-width:52ch;">The press shop, the paint line and the final assembly hall stand where they were laid out seventy-three years ago. The tooling has been replaced eleven times. The floor plan has not.</p>
+      <div style="margin-top:32px;">
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" variant="secondary" onClick="{{ goHeritage }}" hint-size="150px,40px">The company story</x-import>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--surface-sunken);border-top:1px solid var(--border-hairline);border-bottom:1px solid var(--border-hairline);padding:80px 0;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:center;">
+      <div>
+        <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+        <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Finance</div>
+        <h2 style="margin:20px 0 0;font-size:32px;line-height:1.08;letter-spacing:-0.018em;font-weight:800;color:var(--text-strong);">An 844 150 on ETK Select.</h2>
+        <p style="margin:14px 0 0;font-size:16px;line-height:1.6;max-width:46ch;">48 months, 10 000 km per year, 20 % deposit. Representative example, excluding registration and delivery.</p>
+      </div>
+      <div style="background:var(--surface-card);border:1px solid var(--border-hairline);padding:28px;">
+        <div style="display:flex;gap:40px;flex-wrap:wrap;">
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecFigure" label="Monthly rate" value="489" unit="EUR" hint-size="auto,62px"></x-import>
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecFigure" label="Deposit" value="7 780" unit="EUR" hint-size="auto,62px"></x-import>
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecFigure" label="APR" value="3,9" unit="%" hint-size="auto,62px"></x-import>
+        </div>
+        <div style="display:flex;gap:16px;margin-top:28px;align-items:flex-end;flex-wrap:wrap;">
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Select" label="Term" options="{{ termOptions }}" value="{{ term }}" onChange="{{ onTerm }}" style="{{ selStyle }}" hint-size="180px,60px"></x-import>
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" onClick="{{ goConfig }}" hint-size="160px,40px">Calculate your rate</x-import>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:96px 48px;">
+    <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+    <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Ownership</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:32px;">
+      <a href="#" onClick="{{ goOwners }}" style="display:block;background:var(--surface-card);border:1px solid var(--border-hairline);padding:28px;color:var(--text-strong);">
+        <div style="font-size:21px;font-weight:700;letter-spacing:-0.008em;">Book a service</div>
+        <p style="margin:10px 0 0;font-size:14px;line-height:1.55;color:var(--text-muted);">Inspection, oil service and brake work at any ETK partner. Courtesy vehicle on request.</p>
+      </a>
+      <a href="#" onClick="{{ goOwners }}" style="display:block;background:var(--surface-card);border:1px solid var(--border-hairline);padding:28px;color:var(--text-strong);">
+        <div style="font-size:21px;font-weight:700;letter-spacing:-0.008em;">Roadside assistance</div>
+        <p style="margin:10px 0 0;font-size:14px;line-height:1.55;color:var(--text-muted);">Five years from first registration, across 32 countries. One number, around the clock.</p>
+      </a>
+      <a href="#" onClick="{{ goOwners }}" style="display:block;background:var(--surface-card);border:1px solid var(--border-hairline);padding:28px;color:var(--text-strong);">
+        <div style="font-size:21px;font-weight:700;letter-spacing:-0.008em;">Manuals &amp; downloads</div>
+        <p style="margin:10px 0 0;font-size:14px;line-height:1.55;color:var(--text-muted);">Owner's handbooks, iTronic release notes and service schedules for every model year.</p>
+      </a>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:0 48px 96px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));border:1px solid var(--border-hairline);align-items:stretch;">
+      <img src="assets/promo/paddock-grey.webp" alt="ETK works paddock" style="width:100%;height:100%;min-height:300px;object-fit:cover;display:block;background:var(--etk-black);">
+      <div style="padding:40px;display:flex;flex-direction:column;justify-content:center;background:var(--surface-card);">
+        <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+        <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Careers</div>
+        <h2 style="margin:16px 0 0;font-size:32px;line-height:1.08;letter-spacing:-0.018em;font-weight:800;color:var(--text-strong);">Work on the next ETK.</h2>
+        <p style="margin:14px 0 0;font-size:16px;line-height:1.6;max-width:46ch;">Open roles in engineering, production, motorsport and software, in Munich, Regensburg and at the ttSport base on the Nürburgring.</p>
+        <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;">
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" onClick="{{ goJobs }}" hint-size="150px,40px">See open roles</x-import>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ isRange }}" hint-placeholder-val="{{ false }}">
+<main style="max-width:1280px;margin:0 auto;padding:64px 48px 96px;">
+  <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+  <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Models</div>
+  <h1 style="margin:20px 0 0;font-size:52px;line-height:1.02;letter-spacing:-0.025em;font-weight:800;color:var(--text-strong);">The range, trim by trim.</h1>
+  <p style="margin:16px 0 0;font-size:17px;line-height:1.6;max-width:58ch;">Fourteen families across five series. Power is quoted in metric PS, torque in newton metres, top speed in kilometres per hour. A trailing d marks a Diesel.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;margin-top:40px;">
+    <figure style="margin:0;">
+      <img src="assets/promo/individual-twotone.webp" alt="800-Series saloon in two-tone paint" style="width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--surface-sunken);">
+      <figcaption style="margin-top:12px;">
+        <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Saloon</div>
+        <div style="margin-top:6px;font-size:15px;line-height:1.5;color:var(--text-body);">Four doors, 480 litres, 50:50 distribution.</div>
+      </figcaption>
+    </figure>
+    <figure style="margin:0;">
+      <img src="assets/promo/freeway-touring.webp" alt="800-Series Touring on the motorway" style="width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--surface-sunken);">
+      <figcaption style="margin-top:12px;">
+        <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Touring</div>
+        <div style="margin-top:6px;font-size:15px;line-height:1.5;color:var(--text-body);">1 500 litres with the bench folded. Same turn-in.</div>
+      </figcaption>
+    </figure>
+    <figure style="margin:0;">
+      <img src="assets/promo/xc-overlook.webp" alt="800-Series XC on a coastal ridge" style="width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--surface-sunken);">
+      <figcaption style="margin-top:12px;">
+        <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">XC</div>
+        <div style="margin-top:6px;font-size:15px;line-height:1.5;color:var(--text-body);">Raised 40 mm, xMatic as standard, all-terrain tyre.</div>
+      </figcaption>
+    </figure>
+    <figure style="margin:0;">
+      <img src="assets/promo/launch-pair.webp" alt="Two K-Series coupés leaving the line" style="width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--surface-sunken);">
+      <figcaption style="margin-top:12px;">
+        <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Coupé</div>
+        <div style="margin-top:6px;font-size:15px;line-height:1.5;color:var(--text-body);">Two seats, 1 500 kg, the shortened 800 platform.</div>
+      </figcaption>
+    </figure>
+  </div>
+
+  <div style="margin-top:40px;border:1px solid var(--border-hairline);background:var(--surface-card);">
+    <div style="height:3px;background:var(--m-stripe);"></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:28px 32px;padding:28px 24px;">
+      <sc-for list="{{ filterGroups }}" as="g" hint-placeholder-count="4">
+        <div style="min-width:0;">
+          <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">{{ g.label }}</div>
+          <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+            <sc-for list="{{ g.chips }}" as="c" hint-placeholder-count="3">
+              <button onClick="{{ c.go }}" style="min-height:36px;padding:0 16px;border-radius:999px;cursor:pointer;white-space:nowrap;font-family:var(--font-core);font-size:13px;font-weight:600;letter-spacing:0.02em;transition:var(--transition-control);white-space:nowrap;background:{{ c.bg }};color:{{ c.fg }};border:1px solid {{ c.bd }};">{{ c.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+      <div style="min-width:0;">
+        <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Division</div>
+        <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+          <button onClick="{{ toggleTt }}" aria-label="ttSport only" style="min-height:36px;padding:0 14px;display:flex;align-items:center;gap:8px;border-radius:999px;cursor:pointer;transition:var(--transition-control);background:{{ ttBg }};border:1px solid {{ ttBd }};box-shadow:{{ ttRing }};">
+            <img src="assets/logo/ttsport-lettering-cut.png" alt="ttSport" style="height:15px;display:block;">
+            <span style="font-size:13px;font-weight:700;line-height:1;color:{{ ttCheck }};">✓</span>
+          </button>
+          <button onClick="{{ toggleSp }}" style="min-height:36px;padding:0 16px;display:flex;align-items:center;gap:8px;border-radius:999px;cursor:pointer;transition:var(--transition-control);font-family:var(--font-core);font-size:13px;font-weight:600;letter-spacing:0.02em;color:var(--text-body);background:{{ spBg }};border:1px solid {{ spBd }};box-shadow:{{ spRing }};">
+            <span>Special</span>
+            <span style="font-size:13px;font-weight:700;line-height:1;color:{{ spCheck }};">✓</span>
+          </button>
+        </div>
+      </div>
+      <div style="min-width:0;">
+        <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Price</div>
+        <div style="margin-top:12px;font-size:15px;color:var(--text-strong);font-variant-numeric:tabular-nums;">{{ priceLabel }}</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+          <input type="range" min="{{ priceFloor }}" max="{{ priceCeil }}" step="1000" value="{{ pmin }}" onChange="{{ onPmin }}" aria-label="Minimum price" style="width:100%;accent-color:var(--m-blue);">
+          <input type="range" min="{{ priceFloor }}" max="{{ priceCeil }}" step="1000" value="{{ pmax }}" onChange="{{ onPmax }}" aria-label="Maximum price" style="width:100%;accent-color:var(--m-blue);">
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:16px 24px;border-top:1px solid var(--border-hairline);background:var(--surface-sunken);">
+      <div style="font-size:13px;color:var(--text-muted);">{{ resultLabel }}</div>
+      <button onClick="{{ resetFilters }}" style="min-height:36px;padding:0 16px;cursor:pointer;font-family:var(--font-core);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;background:none;border:1px solid var(--etk-graphite-300);color:var(--text-strong);">Reset filters</button>
+    </div>
+  </div>
+
+  <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+    <div style="margin-top:48px;padding:48px 24px;border:1px solid var(--border-hairline);text-align:center;">
+      <div style="font-size:21px;font-weight:700;letter-spacing:-0.008em;color:var(--text-strong);">No trim matches this combination.</div>
+      <p style="margin:10px auto 0;font-size:16px;line-height:1.6;max-width:46ch;color:var(--text-muted);">Widen the price range or clear a filter to see the rest of the range.</p>
+    </div>
+  </sc-if>
+
+  <sc-for list="{{ familyViews }}" as="f" hint-placeholder-count="3">
+    <section style="margin-top:64px;padding-top:40px;border-top:1px solid var(--border-hairline);">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:48px;align-items:center;">
+        <div style="background:var(--etk-graphite-050);padding:20px;">
+          <img src="{{ f.img }}" alt="{{ f.name }}" style="width:100%;display:block;">
+        </div>
+        <div>
+          <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+          <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">{{ f.series }}</div>
+          <h2 style="margin:12px 0 0;font-size:36px;line-height:1.05;letter-spacing:-0.022em;font-weight:800;color:var(--text-strong);">{{ f.code }}</h2>
+          <div style="margin-top:8px;font-size:19px;font-weight:600;color:var(--text-strong);">{{ f.name }}</div>
+          <p style="margin:12px 0 0;font-size:16px;line-height:1.6;max-width:46ch;">{{ f.blurb }}</p>
+          <div style="display:flex;gap:40px;margin-top:24px;flex-wrap:wrap;">
+            <div>
+              <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Engine</div>
+              <div style="margin-top:6px;font-size:16px;color:var(--text-strong);">{{ f.engine }}</div>
+            </div>
+            <div>
+              <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Trims</div>
+              <div style="margin-top:6px;font-size:16px;color:var(--text-strong);font-variant-numeric:tabular-nums;">{{ f.trimCount }}</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;">
+            <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" onClick="{{ f.build }}" hint-size="150px,40px">Build in 3D</x-import>
+          </div>
+        </div>
+      </div>
+
+      <div style="overflow-x:auto;border:1px solid var(--border-hairline);margin-top:32px;">
+        <table style="width:100%;min-width:860px;border-collapse:collapse;font-family:var(--font-core);">
+          <thead>
+            <tr>
+              <th style="text-align:left;padding:16px 20px;background:var(--surface-sunken);border-bottom:1px solid var(--border-hairline);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Trim</th>
+              <th style="text-align:left;padding:16px 20px;background:var(--surface-sunken);border-bottom:1px solid var(--border-hairline);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Power PS</th>
+              <th style="text-align:left;padding:16px 20px;background:var(--surface-sunken);border-bottom:1px solid var(--border-hairline);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Torque N·m</th>
+              <th style="text-align:left;padding:16px 20px;background:var(--surface-sunken);border-bottom:1px solid var(--border-hairline);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Top speed</th>
+              <th style="text-align:left;padding:16px 20px;background:var(--surface-sunken);border-bottom:1px solid var(--border-hairline);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Fuel</th>
+              <th style="text-align:left;padding:16px 20px;background:var(--surface-sunken);border-bottom:1px solid var(--border-hairline);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Drive</th>
+              <th style="text-align:left;padding:16px 20px;background:var(--surface-sunken);border-bottom:1px solid var(--border-hairline);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Transmission</th>
+              <th style="text-align:right;padding:16px 20px;background:var(--surface-sunken);border-bottom:1px solid var(--border-hairline);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">From</th>
+              <th style="padding:16px 20px;background:var(--surface-sunken);border-bottom:1px solid var(--border-hairline);"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <sc-for list="{{ f.rows }}" as="t" hint-placeholder-count="4">
+              <tr>
+                <td style="padding:14px 20px;border-bottom:1px solid var(--border-hairline);font-size:16px;font-weight:700;letter-spacing:-0.008em;color:var(--text-strong);white-space:nowrap;">{{ t.code }}</td>
+                <td style="padding:14px 20px;border-bottom:1px solid var(--border-hairline);font-size:15px;color:var(--text-strong);font-variant-numeric:tabular-nums;">{{ t.ps }}</td>
+                <td style="padding:14px 20px;border-bottom:1px solid var(--border-hairline);font-size:15px;color:var(--text-body);font-variant-numeric:tabular-nums;">{{ t.nm }}</td>
+                <td style="padding:14px 20px;border-bottom:1px solid var(--border-hairline);font-size:15px;color:var(--text-body);font-variant-numeric:tabular-nums;white-space:nowrap;">{{ t.vmax }}</td>
+                <td style="padding:14px 20px;border-bottom:1px solid var(--border-hairline);font-size:15px;color:var(--text-body);">{{ t.fuel }}</td>
+                <td style="padding:14px 20px;border-bottom:1px solid var(--border-hairline);font-size:15px;color:var(--text-body);">{{ t.drive }}</td>
+                <td style="padding:14px 20px;border-bottom:1px solid var(--border-hairline);font-size:15px;color:var(--text-body);">{{ t.gear }}</td>
+                <td style="padding:14px 20px;border-bottom:1px solid var(--border-hairline);font-size:15px;color:var(--text-strong);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap;">{{ t.price }}</td>
+                <td style="padding:10px 20px;border-bottom:1px solid var(--border-hairline);text-align:right;white-space:nowrap;">
+                  <a href="{{ t.url }}" style="display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border:1px solid var(--m-blue);color:var(--m-blue);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:700;" style-hover="background:var(--m-blue);color:#fff;">Build in 3D</a>
+                </td>
+              </tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:32px;margin-top:32px;">
+        <div>
+          <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Exterior colours</div>
+          <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;">
+            <sc-for list="{{ f.ext }}" as="c" hint-placeholder-count="5">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="width:20px;height:20px;display:block;border:1px solid var(--border-hairline);background:{{ c.hex }};"></span>
+                <span style="font-size:13px;color:var(--text-body);white-space:nowrap;">{{ c.name }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Interior colours</div>
+          <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;">
+            <sc-for list="{{ f.int }}" as="c" hint-placeholder-count="3">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <span style="width:20px;height:20px;display:block;border:1px solid var(--border-hairline);background:{{ c.hex }};"></span>
+                <span style="font-size:13px;color:var(--text-body);white-space:nowrap;">{{ c.name }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Options</div>
+          <div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;">
+            <sc-for list="{{ f.optTags }}" as="o" hint-placeholder-count="5">
+              <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Badge" tone="outline" hint-size="auto,20px">{{ o }}</x-import>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <ol style="margin:24px 0 0;padding-left:20px;font-size:13px;line-height:1.7;color:var(--text-muted);max-width:80ch;">
+        <sc-for list="{{ f.notes }}" as="n" hint-placeholder-count="2">
+          <li>{{ n }}</li>
+        </sc-for>
+      </ol>
+    </section>
+  </sc-for>
+
+  <div style="margin-top:96px;">
+    <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+    <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">XC</div>
+    <h2 style="margin:20px 0 0;font-size:36px;line-height:1.08;letter-spacing:-0.018em;font-weight:800;color:var(--text-strong);">Raised, sealed, and still an 800.</h2>
+    <p style="margin:16px 0 32px;font-size:16px;line-height:1.6;max-width:58ch;">The XC sits 40 mm higher on its own springs and dampers, runs xMatic as standard and carries underbody plating from the radiator to the rear subframe. Approach angle is 19°, departure 22°.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;">
+      <figure style="margin:0;">
+        <img src="assets/promo/xc-descent.webp" alt="XC on a gravel descent" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--surface-sunken);">
+        <figcaption style="margin-top:12px;font-size:14px;line-height:1.55;color:var(--text-muted);">Hill descent control holds 6 km/h on loose gravel without brake input.</figcaption>
+      </figure>
+      <figure style="margin:0;">
+        <img src="assets/promo/night-street-xc.webp" alt="XC on a city street at night" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--surface-sunken);">
+        <figcaption style="margin-top:12px;font-size:14px;line-height:1.55;color:var(--text-muted);">The same car, unchanged, on the school run. Ride height drops 15 mm above 120 km/h.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div style="margin-top:96px;">
+    <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+    <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Comparison</div>
+    <h2 style="margin:20px 0 32px;font-size:36px;line-height:1.08;letter-spacing:-0.018em;font-weight:800;color:var(--text-strong);">Three cars, one page.</h2>
+    <div style="overflow-x:auto;border:1px solid var(--border-hairline);">
+      <table style="width:100%;min-width:720px;border-collapse:collapse;font-family:var(--font-core);">
+        <thead>
+          <tr>
+            <th style="text-align:left;padding:20px 24px;background:var(--surface-sunken);border-bottom:1px solid var(--border-hairline);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);width:24%;">Specification</th>
+            <th style="text-align:left;padding:20px 24px;background:var(--surface-sunken);border-bottom:1px solid var(--border-hairline);border-left:1px solid var(--border-hairline);font-size:19px;font-weight:700;letter-spacing:-0.012em;color:var(--text-strong);">856 340 AWD</th>
+            <th style="text-align:left;padding:20px 24px;background:var(--surface-sunken);border-bottom:1px solid var(--border-hairline);border-left:1px solid var(--border-hairline);font-size:19px;font-weight:700;letter-spacing:-0.012em;color:var(--text-strong);">K 360</th>
+            <th style="text-align:left;padding:20px 24px;background:var(--surface-sunken);border-bottom:1px solid var(--border-hairline);border-left:1px solid var(--border-hairline);font-size:19px;font-weight:700;letter-spacing:-0.012em;color:var(--text-strong);">K ttSport+</th>
+          </tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{ compareRows }}" as="r" hint-placeholder-count="8">
+            <tr>
+              <td style="padding:14px 24px;border-bottom:1px solid var(--border-hairline);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">{{ r.label }}</td>
+              <td style="padding:14px 24px;border-bottom:1px solid var(--border-hairline);border-left:1px solid var(--border-hairline);font-size:15px;color:var(--text-strong);font-variant-numeric:tabular-nums;">{{ r.a }}</td>
+              <td style="padding:14px 24px;border-bottom:1px solid var(--border-hairline);border-left:1px solid var(--border-hairline);font-size:15px;color:var(--text-strong);font-variant-numeric:tabular-nums;">{{ r.b }}</td>
+              <td style="padding:14px 24px;border-bottom:1px solid var(--border-hairline);border-left:1px solid var(--border-hairline);font-size:15px;color:var(--text-strong);font-variant-numeric:tabular-nums;">{{ r.c }}</td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+</sc-if>
+
+<sc-if value="{{ isTt }}" hint-placeholder-val="{{ false }}">
+<main>
+  <section style="position:relative;min-height:520px;display:flex;align-items:flex-end;background:var(--etk-black);overflow:hidden;">
+    <img src="assets/promo/motorsport-hero.webp" alt="ETK Motorsport coupé" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,12,13,.9) 0%,rgba(11,12,13,.6) 46%,rgba(11,12,13,.15) 80%);"></div>
+    <div style="position:relative;max-width:1280px;margin:0 auto;padding:96px 48px 64px;width:100%;">
+      <div style="width:64px;height:4px;background:var(--m-stripe);"></div>
+      <div style="margin-top:16px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#fff;">ttSport</div>
+      <h1 style="margin:24px 0 0;font-size:62px;line-height:0.98;letter-spacing:-0.025em;font-weight:800;color:#fff;max-width:14ch;">The division that signs its work on the boot lid.</h1>
+      <p style="margin:24px 0 0;font-size:19px;line-height:1.55;max-width:52ch;color:rgba(255,255,255,0.84);">ttSport has operated as a separate works since 1989. It takes a finished ETK from the line, removes the powertrain and the suspension, and returns the car with its own.</p>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:96px 48px;">
+    <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+    <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">The cars</div>
+    <h2 style="margin:20px 0 40px;font-size:36px;line-height:1.08;letter-spacing:-0.018em;font-weight:800;color:var(--text-strong);">Four codes carry the suffix.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:24px;">
+      <sc-for list="{{ ttModels }}" as="m" hint-placeholder-count="4">
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.VehicleCard" image="{{ m.img }}" code="{{ m.code }}" name="{{ m.name }}" spec="{{ m.spec }}" price="{{ m.price }}" badge="{{ m.badge }}" onClick="{{ m.onClick }}" hint-size="100%,300px"></x-import>
+      </sc-for>
+    </div>
+  </section>
+
+  <section style="background:var(--surface-sunken);border-top:1px solid var(--border-hairline);padding:96px 0;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 48px;">
+      <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+      <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Drive modes</div>
+      <h2 style="margin:20px 0 40px;font-size:36px;line-height:1.08;letter-spacing:-0.018em;font-weight:800;color:var(--text-strong);">Four maps above Comfort.</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;">
+        <sc-for list="{{ driveModes }}" as="d" hint-placeholder-count="5">
+          <div style="background:var(--surface-card);border:1px solid var(--border-hairline);padding:24px;">
+            <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-accent);">{{ d.tag }}</div>
+            <div style="margin-top:10px;font-size:21px;font-weight:700;letter-spacing:-0.008em;color:var(--text-strong);">{{ d.name }}</div>
+            <p style="margin:10px 0 0;font-size:14px;line-height:1.55;color:var(--text-muted);">{{ d.text }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:96px 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:64px;align-items:center;">
+    <img src="assets/promo/paddock-grey.webp" alt="ttSport saloon in the paddock" style="width:100%;display:block;">
+    <div>
+      <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+      <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Specials</div>
+      <h2 style="margin:20px 0 0;font-size:36px;line-height:1.08;letter-spacing:-0.018em;font-weight:800;color:var(--text-strong);">Trackday, Drift, Heritage, Rennspecht, Knallhart.</h2>
+      <p style="margin:16px 0 0;font-size:16px;line-height:1.6;max-width:50ch;">Five limited builds sit above the ttSport range. The Knallhart carries 710 PS from the 3,0 l I6 and runs to 375 km/h. The Drift carries 734 PS through a six-speed manual and the rear axle alone.</p>
+      <div style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;">
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" variant="ttsport" onClick="{{ goSpecials }}" hint-size="170px,40px">See the specials</x-import>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" variant="secondary" onClick="{{ goConfig }}" hint-size="170px,40px">Configure a ttSport</x-import>
+      </div>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ isSpecials }}" hint-placeholder-val="{{ false }}">
+<main style="max-width:1280px;margin:0 auto;padding:64px 48px 96px;">
+  <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+  <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Special vehicles</div>
+  <h1 style="margin:20px 0 0;font-size:52px;line-height:1.02;letter-spacing:-0.025em;font-weight:800;color:var(--text-strong);">Seven builds, each for one purpose.</h1>
+  <p style="margin:16px 0 0;font-size:17px;line-height:1.6;max-width:56ch;">The specials sit above the ttSport range. Each leaves the works in a fixed specification, in a stated number, and is not reordered once the run closes.</p>
+
+  <section style="margin-top:48px;border:1px solid var(--border-hairline);background:var(--surface-card);">
+    <div style="height:4px;background:var(--m-stripe);"></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0;align-items:stretch;">
+      <div style="background:var(--surface-sunken);border-right:1px solid var(--border-hairline);display:flex;align-items:center;justify-content:center;padding:32px;min-height:320px;">
+        <img src="{{ spImg }}" alt="{{ spName }}" style="width:100%;max-width:520px;display:block;">
+      </div>
+      <div style="padding:40px;display:flex;flex-direction:column;min-width:0;">
+        <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Badge" tone="accent" hint-size="auto,20px">{{ spSeries }}</x-import>
+          <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);font-variant-numeric:tabular-nums;">{{ spCounter }}</div>
+        </div>
+        <h2 style="margin:18px 0 0;font-size:40px;line-height:1.02;letter-spacing:-0.022em;font-weight:800;color:var(--text-strong);">{{ spName }}</h2>
+        <div style="margin-top:8px;font-size:17px;color:var(--text-muted);">{{ spCode }}</div>
+        <p style="margin:16px 0 0;font-size:16px;line-height:1.6;max-width:48ch;">{{ spText }}</p>
+        <div style="display:flex;gap:40px;margin-top:28px;flex-wrap:wrap;">
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecFigure" label="Power" value="{{ spPs }}" unit="PS" hint-size="auto,62px"></x-import>
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecFigure" label="Torque" value="{{ spNm }}" unit="N·m" hint-size="auto,62px"></x-import>
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecFigure" label="Top speed" value="{{ spVmax }}" unit="km/h" hint-size="auto,62px"></x-import>
+        </div>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecTable" rows="{{ spRows }}" dense="true" style="{{ mt32 }}" hint-size="100%,140px"></x-import>
+        <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;">
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" size="lg" onClick="{{ spBuild }}" hint-size="150px,48px">Build this car</x-import>
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" size="lg" variant="secondary" onClick="{{ goRange }}" hint-size="150px,48px">All trims</x-import>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 24px;border-top:1px solid var(--border-hairline);background:var(--surface-sunken);">
+      <div style="display:flex;gap:8px;">
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.IconButton" label="Previous vehicle" onClick="{{ spPrev }}" hint-size="40px,40px">
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Icon" name="chevron-left" hint-size="24px,24px"></x-import>
+        </x-import>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.IconButton" label="Next vehicle" onClick="{{ spNext }}" hint-size="40px,40px">
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Icon" name="chevron-right" hint-size="24px,24px"></x-import>
+        </x-import>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;min-width:0;">
+        <sc-for list="{{ spTabs }}" as="s" hint-placeholder-count="7">
+          <button onClick="{{ s.go }}" style="min-height:36px;padding:0 14px;cursor:pointer;font-family:var(--font-core);font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;white-space:nowrap;transition:var(--transition-control);background:{{ s.bg }};color:{{ s.fg }};border:1px solid {{ s.bd }};">{{ s.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ isLogin }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Login" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));min-height:calc(100vh - 72px);">
+  <div style="padding:64px 48px 96px;display:flex;justify-content:center;">
+    <div style="width:100%;max-width:420px;">
+      <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+      <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">My ETK</div>
+      <h1 style="margin:20px 0 0;font-size:44px;line-height:1.04;letter-spacing:-0.025em;font-weight:800;color:var(--text-strong);">{{ loginTitle }}</h1>
+      <p style="margin:14px 0 0;font-size:16px;line-height:1.6;">{{ loginText }}</p>
+      <div style="display:flex;gap:28px;margin-top:32px;border-bottom:1px solid var(--border-hairline);">
+        <button onClick="{{ setSignin }}" style="background:none;border:none;padding:0 0 12px;cursor:pointer;font-family:var(--font-core);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;color:{{ tabInC }};box-shadow:{{ tabInR }};">Log in</button>
+        <button onClick="{{ setCreate }}" style="background:none;border:none;padding:0 0 12px;cursor:pointer;font-family:var(--font-core);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:700;color:{{ tabNewC }};box-shadow:{{ tabNewR }};">Create account</button>
+      </div>
+      <form onSubmit="{{ submitLogin }}" noValidate="true" style="display:grid;gap:16px;margin-top:28px;">
+        <sc-if value="{{ isCreate }}" hint-placeholder-val="{{ false }}">
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Input" label="Full name" placeholder="Anna Brandt" autoComplete="name" value="{{ lfName }}" onChange="{{ onLfName }}" hint-size="100%,64px"></x-import>
+        </sc-if>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Input" label="Email" type="email" placeholder="anna.brandt@example.de" autoComplete="email" value="{{ lfEmail }}" onChange="{{ onLfEmail }}" hint-size="100%,64px"></x-import>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Input" label="Password" type="password" hint="At least six characters." autoComplete="current-password" value="{{ lfPw }}" onChange="{{ onLfPw }}" hint-size="100%,82px"></x-import>
+        <sc-if value="{{ hasLoginErr }}" hint-placeholder-val="{{ false }}">
+          <div role="alert" style="font-size:14px;line-height:1.5;color:var(--status-fault);">{{ loginErr }}</div>
+        </sc-if>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" type="submit" size="lg" block="true" hint-size="100%,48px">{{ loginBtn }}</x-import>
+      </form>
+      <a href="#" onClick="{{ noop }}" style="display:inline-block;margin-top:20px;font-size:14px;">Forgotten your password?</a>
+      <div style="margin-top:40px;padding-top:24px;border-top:1px solid var(--border-hairline);">
+        <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">With an ETK account</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:14px;font-size:14px;line-height:1.5;">
+          <div>Your vehicle, service history and inspection dates</div>
+          <div>Saved builds from every configurator</div>
+          <div>Job applications and their status</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="position:relative;min-height:420px;background:var(--etk-black);">
+    <img src="assets/promo/night-lineup.webp" alt="ETK range at night" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
+  </div>
+</main>
+</sc-if>
+
+<sc-if value="{{ isAccount }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="My ETK" style="max-width:1280px;margin:0 auto;padding:64px 48px 96px;">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;">
+    <div>
+      <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+      <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">My ETK · {{ custNo }}</div>
+      <h1 style="margin:20px 0 0;font-size:52px;line-height:1.02;letter-spacing:-0.025em;font-weight:800;color:var(--text-strong);">{{ userName }}</h1>
+      <p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:var(--text-muted);">Signed in as {{ userEmail }}</p>
+    </div>
+    <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" variant="secondary" onClick="{{ signOut }}" hint-size="110px,40px">Sign out</x-import>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px;margin-top:48px;align-items:start;">
+    <div style="background:var(--surface-card);border:1px solid var(--border-hairline);padding:28px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;">
+        <div>
+          <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">846 310d · M-ET 2841</div>
+          <div style="margin-top:8px;font-size:21px;font-weight:700;letter-spacing:-0.008em;color:var(--text-strong);">Your vehicle</div>
+        </div>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Badge" tone="warn" hint-size="auto,20px">Service due</x-import>
+      </div>
+      <p style="margin:14px 0 0;font-size:16px;line-height:1.6;">Your 846 is due for its second inspection in 1 200 km. Book at your ETK partner.</p>
+      <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecTable" rows="{{ vehicleRows }}" dense="true" style="{{ mt20 }}" hint-size="100%,140px"></x-import>
+      <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;">
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" onClick="{{ goOwners }}" hint-size="140px,40px">Book a service</x-import>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" variant="secondary" onClick="{{ goDealers }}" hint-size="140px,40px">Find a partner</x-import>
+      </div>
+    </div>
+
+    <div style="background:var(--surface-card);border:1px solid var(--border-hairline);padding:28px;">
+      <div style="font-size:21px;font-weight:700;letter-spacing:-0.008em;color:var(--text-strong);">Saved builds</div>
+      <div style="display:flex;flex-direction:column;margin-top:16px;">
+        <sc-for list="{{ savedBuilds }}" as="b" hint-placeholder-count="3">
+          <a href="#" onClick="{{ b.open }}" style="display:flex;gap:16px;align-items:center;padding:14px 0;border-top:1px solid var(--border-hairline);color:var(--text-strong);">
+            <img src="{{ b.img }}" alt="" style="width:96px;height:54px;object-fit:cover;display:block;background:var(--surface-sunken);flex:0 0 auto;">
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:16px;font-weight:700;">{{ b.code }}</div>
+              <div style="margin-top:2px;font-size:13px;color:var(--text-muted);">{{ b.spec }}</div>
+            </div>
+            <div style="font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap;">{{ b.price }}</div>
+          </a>
+        </sc-for>
+      </div>
+      <div style="margin-top:16px;">
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" variant="secondary" onClick="{{ goConfig }}" hint-size="140px,40px">New build</x-import>
+      </div>
+    </div>
+
+    <div style="background:var(--surface-card);border:1px solid var(--border-hairline);padding:28px;">
+      <div style="font-size:21px;font-weight:700;letter-spacing:-0.008em;color:var(--text-strong);">Job applications</div>
+      <sc-if value="{{ hasApps }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;margin-top:16px;">
+          <sc-for list="{{ apps }}" as="a" hint-placeholder-count="1">
+            <div style="display:flex;gap:16px;align-items:flex-start;justify-content:space-between;padding:14px 0;border-top:1px solid var(--border-hairline);">
+              <div style="min-width:0;">
+                <div style="font-size:16px;font-weight:700;color:var(--text-strong);">{{ a.title }}</div>
+                <div style="margin-top:2px;font-size:13px;color:var(--text-muted);">{{ a.meta }}</div>
+              </div>
+              <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Badge" tone="neutral" hint-size="auto,20px">Received</x-import>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ noApps }}" hint-placeholder-val="{{ true }}">
+        <p style="margin:10px 0 0;font-size:14px;line-height:1.55;color:var(--text-muted);">No applications yet. Roles you apply for appear here with their status.</p>
+      </sc-if>
+      <div style="margin-top:16px;">
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" variant="secondary" onClick="{{ goJobs }}" hint-size="140px,40px">Open roles</x-import>
+      </div>
+    </div>
+
+    <div style="background:var(--surface-card);border:1px solid var(--border-hairline);padding:28px;">
+      <div style="font-size:21px;font-weight:700;letter-spacing:-0.008em;color:var(--text-strong);">Profile</div>
+      <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecTable" rows="{{ profileRows }}" dense="true" style="{{ mt20 }}" hint-size="100%,180px"></x-import>
+    </div>
+  </div>
+</main>
+</sc-if>
+
+<sc-if value="{{ isJobs }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Careers">
+  <section style="position:relative;min-height:460px;display:flex;align-items:flex-end;background:var(--etk-black);overflow:hidden;">
+    <img src="assets/promo/paddock-grey.webp" alt="ETK works paddock" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,12,13,.9) 0%,rgba(11,12,13,.6) 48%,rgba(11,12,13,.15) 82%);"></div>
+    <div style="position:relative;max-width:1280px;margin:0 auto;padding:96px 48px 64px;width:100%;">
+      <div style="width:64px;height:4px;background:var(--m-stripe);"></div>
+      <div style="margin-top:16px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#fff;">Careers at ETK</div>
+      <h1 style="margin:24px 0 0;font-size:58px;line-height:0.98;letter-spacing:-0.025em;font-weight:800;color:#fff;max-width:15ch;">Work on the next ETK.</h1>
+      <p style="margin:24px 0 0;font-size:19px;line-height:1.55;max-width:52ch;color:rgba(255,255,255,0.84);">Every car is engineered in Munich, built in Regensburg and tested on the Nürburgring. Applications go through your ETK account.</p>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:64px 48px 96px;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;">
+      <div>
+        <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+        <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Open roles</div>
+        <h2 style="margin:16px 0 0;font-size:36px;line-height:1.08;letter-spacing:-0.018em;font-weight:800;color:var(--text-strong);">{{ jobCountLabel }}</h2>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end;">
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Input" label="Search" placeholder="Title or keyword" value="{{ jobQ }}" onChange="{{ onJobQ }}" style="{{ inputStyle }}" hint-size="260px,64px"></x-import>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Select" label="Location" options="{{ jobLocOptions }}" value="{{ jobLoc }}" onChange="{{ onJobLoc }}" style="{{ selStyle }}" hint-size="200px,64px"></x-import>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:28px;">
+      <sc-for list="{{ jobAreas }}" as="c" hint-placeholder-count="6">
+        <button onClick="{{ c.go }}" style="min-height:36px;padding:0 16px;border-radius:999px;cursor:pointer;white-space:nowrap;font-family:var(--font-core);font-size:13px;font-weight:600;transition:var(--transition-control);background:{{ c.bg }};color:{{ c.fg }};border:1px solid {{ c.bd }};">{{ c.label }}</button>
+      </sc-for>
+    </div>
+
+    <div style="margin-top:32px;border-bottom:1px solid var(--border-hairline);">
+      <sc-for list="{{ jobList }}" as="j" hint-placeholder-count="6">
+        <div style="border-top:1px solid var(--border-hairline);">
+          <button onClick="{{ j.toggle }}" aria-expanded="{{ j.open }}" style="width:100%;display:flex;gap:20px;align-items:center;padding:20px 16px;background:{{ j.bg }};border:none;border-left:2px solid {{ j.edge }};cursor:pointer;text-align:left;font-family:var(--font-core);">
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:18px;font-weight:700;letter-spacing:-0.008em;color:var(--text-strong);">{{ j.title }}</div>
+              <div style="margin-top:4px;font-size:14px;color:var(--text-muted);">{{ j.meta }}</div>
+            </div>
+            <sc-if value="{{ j.applied }}" hint-placeholder-val="{{ false }}">
+              <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Badge" tone="ok" hint-size="auto,20px">Applied</x-import>
+            </sc-if>
+            <span style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600;color:var(--text-muted);font-variant-numeric:tabular-nums;white-space:nowrap;">{{ j.ref }}</span>
+            <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Icon" name="{{ j.icon }}" hint-size="20px,20px"></x-import>
+          </button>
+          <sc-if value="{{ j.open }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:8px 18px 36px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:40px;background:var(--surface-sunken);border-left:2px solid var(--m-blue);">
+              <div>
+                <p style="margin:0;font-size:16px;line-height:1.6;max-width:60ch;">{{ j.text }}</p>
+                <div style="margin-top:24px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">What the role needs</div>
+                <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
+                  <sc-for list="{{ j.reqs }}" as="req" hint-placeholder-count="3">
+                    <div style="display:flex;gap:10px;font-size:15px;line-height:1.5;"><span style="color:var(--text-muted);">·</span><span>{{ req }}</span></div>
+                  </sc-for>
+                </div>
+              </div>
+              <div>
+                <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecTable" rows="{{ j.rows }}" dense="true" hint-size="100%,140px"></x-import>
+                <sc-if value="{{ j.notApplied }}" hint-placeholder-val="{{ true }}">
+                  <div style="display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;align-items:center;">
+                    <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" onClick="{{ j.apply }}" hint-size="170px,40px">{{ applyLabel }}</x-import>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ j.applied }}" hint-placeholder-val="{{ false }}">
+                  <p style="margin:24px 0 0;font-size:14px;line-height:1.55;">Application sent on {{ j.date }}. <a href="#" onClick="{{ goAccount }}">Track it in My ETK</a></p>
+                </sc-if>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+    <sc-if value="{{ noJobs }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:48px 0;display:flex;flex-direction:column;gap:16px;align-items:flex-start;">
+        <p style="margin:0;font-size:16px;line-height:1.6;">No open roles match these filters.</p>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" variant="secondary" onClick="{{ resetJobs }}" hint-size="130px,40px">Clear filters</x-import>
+      </div>
+    </sc-if>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ isShop }}" hint-placeholder-val="{{ false }}">
+<main data-screen-label="Webshop" style="max-width:1280px;margin:0 auto;padding:64px 48px 96px;">
+  <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+  <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Webshop</div>
+  <h1 style="margin:20px 0 0;font-size:52px;line-height:1.02;letter-spacing:-0.025em;font-weight:800;color:var(--text-strong);">ETK Collection.</h1>
+  <p style="margin:16px 0 0;font-size:17px;line-height:1.6;max-width:52ch;">Original accessories, scale models and works clothing. Delivery within Germany in 3–5 working days.</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:32px;">
+    <sc-for list="{{ shopCats }}" as="c" hint-placeholder-count="4">
+      <button onClick="{{ c.go }}" style="min-height:36px;padding:0 16px;border-radius:999px;cursor:pointer;white-space:nowrap;font-family:var(--font-core);font-size:13px;font-weight:600;transition:var(--transition-control);background:{{ c.bg }};color:{{ c.fg }};border:1px solid {{ c.bd }};">{{ c.label }}</button>
+    </sc-for>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,560px),1fr));gap:32px;margin-top:32px;align-items:start;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:24px;">
+      <sc-for list="{{ shopList }}" as="p" hint-placeholder-count="6">
+        <div style="display:flex;flex-direction:column;background:var(--surface-card);border:1px solid var(--border-hairline);">
+          <sc-if value="{{ p.hasImg }}" hint-placeholder-val="{{ true }}">
+            <img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:var(--surface-sunken);">
+          </sc-if>
+          <sc-if value="{{ p.noImg }}" hint-placeholder-val="{{ false }}">
+            <div style="width:100%;aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;background:var(--surface-sunken);color:var(--text-muted);">
+              <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Icon" name="{{ p.icon }}" size="{{ iconLg }}" hint-size="32px,32px"></x-import>
+            </div>
+          </sc-if>
+          <div style="padding:18px;display:flex;flex-direction:column;flex:1;">
+            <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">{{ p.cat }}</div>
+            <div style="margin-top:6px;font-size:16px;font-weight:700;line-height:1.35;color:var(--text-strong);text-wrap:pretty;">{{ p.name }}</div>
+            <div style="margin-top:4px;font-size:13px;line-height:1.5;color:var(--text-muted);">{{ p.note }}</div>
+            <div style="margin-top:auto;padding-top:16px;display:flex;justify-content:space-between;align-items:center;gap:12px;">
+              <span style="font-size:16px;font-variant-numeric:tabular-nums;color:var(--text-strong);">{{ p.price }}</span>
+              <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" size="sm" variant="{{ p.variant }}" onClick="{{ p.add }}" hint-size="90px,32px">{{ p.btn }}</x-import>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <aside style="position:sticky;top:96px;max-width:420px;width:100%;justify-self:end;background:var(--surface-card);border:1px solid var(--border-hairline);box-shadow:0 2px 8px rgba(11,12,13,.08);padding:24px;">
+      <div style="font-size:21px;font-weight:700;letter-spacing:-0.008em;color:var(--text-strong);">Basket</div>
+      <sc-if value="{{ hasOrder }}" hint-placeholder-val="{{ false }}">
+        <p role="status" style="margin:12px 0 0;font-size:14px;line-height:1.55;">Order {{ orderNo }} received. A confirmation has been sent to {{ orderEmail }}.</p>
+      </sc-if>
+      <sc-if value="{{ emptyCart }}" hint-placeholder-val="{{ true }}">
+        <p style="margin:12px 0 0;font-size:14px;line-height:1.55;color:var(--text-muted);">Your basket is empty.</p>
+      </sc-if>
+      <sc-if value="{{ hasCart }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;margin-top:12px;">
+          <sc-for list="{{ cartList }}" as="ci" hint-placeholder-count="2">
+            <div style="display:flex;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--border-hairline);">
+              <div style="flex:1;min-width:0;">
+                <div style="font-size:14px;font-weight:700;line-height:1.35;color:var(--text-strong);">{{ ci.name }}</div>
+                <div style="margin-top:2px;font-size:13px;color:var(--text-muted);font-variant-numeric:tabular-nums;">{{ ci.unit }}</div>
+              </div>
+              <div style="display:flex;align-items:center;border:1px solid var(--border-hairline);border-radius:2px;">
+                <button onClick="{{ ci.dec }}" aria-label="Remove one" style="width:28px;height:28px;background:none;border:none;cursor:pointer;font-family:var(--font-core);font-size:16px;color:var(--text-strong);">–</button>
+                <span style="min-width:20px;text-align:center;font-size:14px;font-variant-numeric:tabular-nums;">{{ ci.qty }}</span>
+                <button onClick="{{ ci.inc }}" aria-label="Add one" style="width:28px;height:28px;background:none;border:none;cursor:pointer;font-family:var(--font-core);font-size:16px;color:var(--text-strong);">+</button>
+              </div>
+              <div style="width:84px;text-align:right;font-size:14px;font-variant-numeric:tabular-nums;">{{ ci.total }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:6px;padding-top:14px;border-top:1px solid var(--border-hairline);font-size:14px;font-variant-numeric:tabular-nums;">
+          <div style="display:flex;justify-content:space-between;"><span>Subtotal</span><span>{{ cartSub }}</span></div>
+          <div style="display:flex;justify-content:space-between;"><span>Delivery</span><span>{{ cartShip }}</span></div>
+          <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:16px;font-weight:700;color:var(--text-strong);"><span>Total incl. VAT</span><span>{{ cartTotal }}</span></div>
+        </div>
+        <div style="margin-top:20px;">
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" block="true" onClick="{{ checkout }}" hint-size="100%,40px">{{ checkoutLabel }}</x-import>
+        </div>
+        <p style="margin:12px 0 0;font-size:13px;line-height:1.5;color:var(--text-muted);">Free delivery from 150 EUR.</p>
+      </sc-if>
+    </aside>
+  </div>
+</main>
+</sc-if>
+
+<sc-if value="{{ isMotorsport }}" hint-placeholder-val="{{ false }}">
+<main>
+  <section style="position:relative;min-height:520px;display:flex;align-items:flex-end;background:var(--etk-black);overflow:hidden;">
+    <img src="assets/promo/motorsport-aerial.webp" alt="Car 28 on circuit" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,12,13,.9) 0%,rgba(11,12,13,.6) 48%,rgba(11,12,13,.15) 82%);"></div>
+    <div style="position:relative;max-width:1280px;margin:0 auto;padding:96px 48px 64px;width:100%;">
+      <div style="width:64px;height:4px;background:var(--m-stripe);"></div>
+      <div style="margin-top:16px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#fff;">ETK Motorsport</div>
+      <h1 style="margin:24px 0 0;font-size:58px;line-height:0.98;letter-spacing:-0.025em;font-weight:800;color:#fff;max-width:15ch;">Car 28 runs the full season.</h1>
+      <p style="margin:24px 0 0;font-size:19px;line-height:1.55;max-width:52ch;color:rgba(255,255,255,0.84);">The works entry is built from the K-Series Trackday and races in the specification it leaves the works in. No part on it is unavailable to a customer.</p>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:96px 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:64px;align-items:center;">
+    <div>
+      <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+      <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">The car</div>
+      <h2 style="margin:20px 0 0;font-size:36px;line-height:1.08;letter-spacing:-0.018em;font-weight:800;color:var(--text-strong);">K-Series Trackday, unmodified.</h2>
+      <p style="margin:16px 0 0;font-size:16px;line-height:1.6;max-width:50ch;">3,0 l I6, all-wheel drive, eight-speed automatic. The roll cage, the number plate and the livery are the only items the works adds.</p>
+      <div style="display:flex;gap:48px;margin-top:32px;flex-wrap:wrap;">
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecFigure" label="Power" value="471" unit="PS" hint-size="auto,62px"></x-import>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecFigure" label="Torque" value="575" unit="N·m" hint-size="auto,62px"></x-import>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecFigure" label="Top speed" value="310" unit="km/h" hint-size="auto,62px"></x-import>
+      </div>
+      <div style="display:flex;gap:12px;margin-top:36px;flex-wrap:wrap;">
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" onClick="{{ goSpecials }}" hint-size="170px,40px">See the K Specials</x-import>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" variant="secondary" onClick="{{ goTt }}" hint-size="150px,40px">ttSport</x-import>
+      </div>
+    </div>
+    <img src="assets/promo/motorsport-front.webp" alt="Car 28, front" style="width:100%;display:block;">
+  </section>
+
+  <section style="background:var(--surface-sunken);border-top:1px solid var(--border-hairline);border-bottom:1px solid var(--border-hairline);padding:0;">
+    <img src="assets/promo/track-hairpin.webp" alt="Car 28 at the hairpin" style="width:100%;max-height:520px;object-fit:cover;display:block;">
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:96px 48px;">
+    <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+    <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Round 7 · Lakeside</div>
+    <h2 style="margin:20px 0 32px;font-size:36px;line-height:1.08;letter-spacing:-0.018em;font-weight:800;color:var(--text-strong);">Two laps from the same afternoon.</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;">
+      <figure style="margin:0;">
+        <img src="assets/promo/circuit-dam.webp" alt="Car 28 on the dam section" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--surface-sunken);">
+        <figcaption style="margin-top:12px;font-size:14px;line-height:1.55;color:var(--text-muted);">Turn 9 onto the dam, taken in fourth at 168 km/h.</figcaption>
+      </figure>
+      <figure style="margin:0;">
+        <img src="assets/promo/circuit-straight.webp" alt="Car 28 on the main straight" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--surface-sunken);">
+        <figcaption style="margin-top:12px;font-size:14px;line-height:1.55;color:var(--text-muted);">The main straight. 284 km/h at the braking board, 1 240 kg on the scales.</figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ isHeritage }}" hint-placeholder-val="{{ false }}">
+<main>
+  <section style="position:relative;min-height:460px;display:flex;align-items:flex-end;background:var(--etk-black);overflow:hidden;">
+    <img src="assets/promo/dusk-twins.webp" alt="Two ETK saloons at dusk" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
+    <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,12,13,.9) 0%,rgba(11,12,13,.6) 50%,rgba(11,12,13,.2) 82%);"></div>
+    <div style="position:relative;max-width:1280px;margin:0 auto;padding:96px 48px 64px;width:100%;">
+      <div style="width:64px;height:4px;background:var(--m-stripe);"></div>
+      <div style="margin-top:16px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#fff;">Heritage</div>
+      <h1 style="margin:24px 0 0;font-size:58px;line-height:0.98;letter-spacing:-0.025em;font-weight:800;color:#fff;max-width:16ch;">Seventy-three years on the same floor plan.</h1>
+      <p style="margin:24px 0 0;font-size:19px;line-height:1.55;max-width:54ch;color:rgba(255,255,255,0.8);">We have built cars in this hall since 1953. The tooling has been replaced eleven times; the building has not moved. What follows is the short version.</p>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:96px 48px;">
+    <sc-for list="{{ timeline }}" as="t" hint-placeholder-count="7">
+      <div style="display:grid;grid-template-columns:140px 1fr;gap:32px;padding:28px 0;border-top:1px solid var(--border-hairline);align-items:start;">
+        <div style="font-size:34px;line-height:1;font-weight:300;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;color:var(--text-strong);">{{ t.year }}</div>
+        <div>
+          <div style="font-size:19px;font-weight:700;letter-spacing:-0.008em;color:var(--text-strong);">{{ t.title }}</div>
+          <p style="margin:8px 0 0;font-size:16px;line-height:1.6;max-width:62ch;">{{ t.text }}</p>
+        </div>
+      </div>
+    </sc-for>
+  </section>
+
+  <section style="background:var(--surface-sunken);border-top:1px solid var(--border-hairline);border-bottom:1px solid var(--border-hairline);padding:80px 0;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 48px;display:flex;gap:64px;flex-wrap:wrap;">
+      <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecFigure" label="Cars built" value="6 140 000" size="lg" hint-size="auto,76px"></x-import>
+      <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecFigure" label="Employees" value="24 800" size="lg" hint-size="auto,76px"></x-import>
+      <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecFigure" label="Plants" value="4" size="lg" hint-size="auto,76px"></x-import>
+      <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecFigure" label="Markets" value="32" size="lg" hint-size="auto,76px"></x-import>
+    </div>
+  </section>
+
+  <section style="max-width:1280px;margin:0 auto;padding:96px 48px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:64px;align-items:center;">
+    <div>
+      <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+      <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Manufacturing</div>
+      <h2 style="margin:20px 0 0;font-size:36px;line-height:1.08;letter-spacing:-0.018em;font-weight:800;color:var(--text-strong);">Aluminium where it earns its cost.</h2>
+      <p style="margin:16px 0 0;font-size:16px;line-height:1.6;max-width:54ch;">The body in white is a mixed structure: aluminium for the bonnet, doors, boot lid and front longitudinal members, high-strength steel for the passenger cell. An 856 Touring weighs 1 705 kg with a full tank. The saloon it is derived from weighs 1 630 kg.</p>
+      <p style="margin:16px 0 0;font-size:16px;line-height:1.6;max-width:54ch;">Every shell is measured at 214 points before it leaves the body shop. The tolerance is ±0,5 mm.</p>
+    </div>
+    <img src="assets/promo/interior-top.webp" alt="800-Series from above" style="width:100%;display:block;">
+  </section>
+
+  <section style="position:relative;height:520px;overflow:hidden;background:var(--etk-black);">
+    <img src="assets/promo/night-lineup.webp" alt="Five ETK models at the proving ground after dark" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
+    <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(11,12,13,.88) 0%,rgba(11,12,13,.25) 55%,rgba(11,12,13,.5) 100%);"></div>
+    <div style="position:relative;height:100%;max-width:1280px;margin:0 auto;padding:0 48px 56px;display:flex;flex-direction:column;justify-content:flex-end;">
+      <div style="width:48px;height:4px;background:var(--m-stripe);"></div>
+      <div style="margin-top:14px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#fff;">Proving ground · 02:40</div>
+      <h2 style="margin:16px 0 0;font-size:40px;line-height:1.05;letter-spacing:-0.022em;font-weight:800;color:#fff;max-width:22ch;">Every model year ends here.</h2>
+      <p style="margin:14px 0 0;font-size:17px;line-height:1.6;max-width:48ch;color:#fff;">The night shift signs off the lighting, the tail lamp signature and the door projection on all five bodies before the year is released.</p>
+    </div>
+  </section>
+</main>
+</sc-if>
+
+<sc-if value="{{ isDealers }}" hint-placeholder-val="{{ false }}">
+<main style="max-width:1280px;margin:0 auto;padding:64px 48px 96px;">
+  <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+  <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Find a partner</div>
+  <h1 style="margin:20px 0 0;font-size:52px;line-height:1.02;letter-spacing:-0.025em;font-weight:800;color:var(--text-strong);">Sales and service, 412 locations.</h1>
+  <p style="margin:16px 0 0;font-size:17px;line-height:1.6;max-width:52ch;">Enter a postcode or a city. Partners marked as works-certified carry ttSport tooling and diagnostic access.</p>
+
+  <div style="display:flex;gap:16px;margin-top:40px;flex-wrap:wrap;align-items:flex-end;">
+    <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Input" label="Postcode or city" placeholder="81241 München" value="{{ q }}" onChange="{{ onQ }}" style="{{ inputStyle }}" hint-size="260px,64px"></x-import>
+    <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Select" label="Service" options="{{ serviceOptions }}" style="{{ selStyle }}" hint-size="200px,64px"></x-import>
+    <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" hint-size="110px,40px">Search</x-import>
+  </div>
+
+  <div style="display:grid;grid-template-columns:minmax(300px,420px) 1fr;gap:32px;margin-top:40px;align-items:start;">
+    <div style="border:1px solid var(--border-hairline);">
+      <sc-for list="{{ dealers }}" as="d" hint-placeholder-count="5">
+        <div onClick="{{ d.go }}" style="padding:20px 24px;cursor:pointer;border-bottom:1px solid var(--border-hairline);border-left:2px solid {{ d.edge }};background:{{ d.bg }};transition:var(--transition-control);">
+          <div style="display:flex;justify-content:space-between;gap:16px;align-items:flex-start;">
+            <div style="font-size:17px;line-height:1.3;font-weight:700;letter-spacing:-0.004em;color:var(--text-strong);min-width:0;">{{ d.name }}</div>
+            <div style="font-size:13px;color:var(--text-muted);font-variant-numeric:tabular-nums;white-space:nowrap;">{{ d.distance }}</div>
+          </div>
+          <div style="margin-top:6px;font-size:14px;line-height:1.5;color:var(--text-muted);">{{ d.address }}</div>
+          <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;">
+            <sc-for list="{{ d.tags }}" as="t" hint-placeholder-count="2">
+              <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Badge" tone="outline" hint-size="auto,20px">{{ t }}</x-import>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="position:relative;min-height:520px;background:var(--surface-sunken);border:1px solid var(--border-hairline);background-image:linear-gradient(var(--etk-graphite-100) 1px,transparent 1px),linear-gradient(90deg,var(--etk-graphite-100) 1px,transparent 1px);background-size:48px 48px;">
+      <sc-for list="{{ dealers }}" as="d" hint-placeholder-count="5">
+        <button onClick="{{ d.go }}" style="position:absolute;left:{{ d.x }}%;top:{{ d.y }}%;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;padding:0;cursor:pointer;">
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:3px 7px;white-space:nowrap;background:{{ d.pinBg }};color:{{ d.pinFg }};">{{ d.city }}</span>
+          <span style="width:9px;height:9px;background:{{ d.pinBg }};"></span>
+        </button>
+      </sc-for>
+      <div style="position:absolute;left:16px;bottom:16px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Southern Germany · schematic</div>
+    </div>
+  </div>
+</main>
+</sc-if>
+
+<sc-if value="{{ isOwners }}" hint-placeholder-val="{{ false }}">
+<main style="max-width:1280px;margin:0 auto;padding:64px 48px 96px;">
+  <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+  <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Owners &amp; service</div>
+  <h1 style="margin:20px 0 0;font-size:52px;line-height:1.02;letter-spacing:-0.025em;font-weight:800;color:var(--text-strong);">My ETK.</h1>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:40px;">
+    <div style="background:var(--surface-card);border:1px solid var(--border-hairline);padding:28px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;">
+        <div>
+          <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">846 310d · M-ET 2841</div>
+          <div style="margin-top:8px;font-size:21px;font-weight:700;letter-spacing:-0.008em;color:var(--text-strong);">Your vehicle</div>
+        </div>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Badge" tone="warn" hint-size="auto,20px">Service due</x-import>
+      </div>
+      <p style="margin:14px 0 0;font-size:16px;line-height:1.6;">Your 846 is due for its second inspection in 1 200 km. Book at your ETK partner.</p>
+      <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecTable" rows="{{ vehicleRows }}" dense="true" style="{{ mt20 }}" hint-size="100%,140px"></x-import>
+    </div>
+
+    <div style="background:var(--surface-card);border:1px solid var(--border-hairline);padding:28px;">
+      <div style="font-size:21px;font-weight:700;letter-spacing:-0.008em;color:var(--text-strong);">Book a service</div>
+      <p style="margin:10px 0 20px;font-size:14px;line-height:1.55;color:var(--text-muted);">Select a partner and a date. Confirmation arrives by email within one working day.</p>
+      <div style="display:grid;gap:16px;">
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Select" label="Partner" options="{{ partnerOptions }}" hint-size="100%,64px"></x-import>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Select" label="Work required" options="{{ workOptions }}" hint-size="100%,64px"></x-import>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Input" label="Preferred date" placeholder="24.09.2026" hint-size="100%,64px"></x-import>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" block="true" hint-size="100%,40px">Request an appointment</x-import>
+      </div>
+    </div>
+
+    <div style="background:var(--etk-graphite-900);color:#fff;padding:28px;">
+      <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:rgba(255,255,255,0.62);">Roadside assistance</div>
+      <div style="margin-top:12px;font-size:34px;line-height:1;font-weight:300;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;color:#fff;">0800 372 0000</div>
+      <p style="margin:16px 0 0;font-size:15px;line-height:1.6;color:rgba(255,255,255,0.74);">Five years from first registration, 32 countries, 24 hours. Recovery, onward travel and hotel cover are included.</p>
+      <div style="height:4px;background:var(--m-stripe);margin-top:24px;"></div>
+    </div>
+  </div>
+
+  <div style="margin-top:96px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:64px;align-items:start;">
+    <div>
+      <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+      <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Test drive</div>
+      <h2 style="margin:20px 0 0;font-size:36px;line-height:1.08;letter-spacing:-0.018em;font-weight:800;color:var(--text-strong);">Drive it before you specify it.</h2>
+      <p style="margin:16px 0 0;font-size:16px;line-height:1.6;max-width:50ch;">Test drives run for 45 minutes from the partner's forecourt, or as a 24-hour loan on request. Bring a valid licence held for at least two years.</p>
+      <img src="assets/promo/driving-experience.webp" alt="ETK Driving Experience" style="width:100%;display:block;margin-top:28px;">
+      <div style="margin-top:28px;">
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecTable" rows="{{ testDriveRows }}" hint-size="100%,160px"></x-import>
+      </div>
+    </div>
+    <div style="background:var(--surface-sunken);border:1px solid var(--border-hairline);padding:32px;">
+      <div style="display:grid;gap:16px;">
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Select" label="Model" options="{{ modelOptions }}" hint-size="100%,64px"></x-import>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;">
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Input" label="First name" placeholder="Anna" hint-size="100%,64px"></x-import>
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Input" label="Surname" placeholder="Brandt" hint-size="100%,64px"></x-import>
+        </div>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Input" label="Email" placeholder="anna.brandt@example.de" hint-size="100%,64px"></x-import>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:16px;">
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Input" label="Postcode" placeholder="81241" hint-size="100%,64px"></x-import>
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Input" label="Preferred date" placeholder="02.10.2026" hint-size="100%,64px"></x-import>
+        </div>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Checkbox" label="Contact me about this request" description="ETK will use these details only to arrange the drive." checked="{{ consent }}" onChange="{{ onConsent }}" hint-size="100%,44px"></x-import>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" size="lg" block="true" hint-size="100%,48px">Request a test drive</x-import>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:96px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0;border:1px solid var(--border-hairline);align-items:stretch;">
+    <img src="assets/promo/puddle-lamp.webp" alt="Door projection on the ground beside an ETK" style="width:100%;height:100%;min-height:280px;object-fit:cover;display:block;background:var(--etk-black);">
+    <div style="padding:40px;display:flex;flex-direction:column;justify-content:center;background:var(--surface-card);">
+      <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+      <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Door projection</div>
+      <h2 style="margin:16px 0 0;font-size:28px;line-height:1.1;letter-spacing:-0.014em;font-weight:800;color:var(--text-strong);">The roundel on the ground, when the door opens.</h2>
+      <p style="margin:14px 0 0;font-size:16px;line-height:1.6;max-width:46ch;">Fitted to both front doors from the Exclusive line upwards. The lens is replaceable at any partner and is listed in the accessory catalogue as part 63 31 7 425 100.</p>
+    </div>
+  </div>
+</main>
+</sc-if>
+
+<sc-if value="{{ isConfig }}" hint-placeholder-val="{{ false }}">
+<main style="max-width:1280px;margin:0 auto;padding:48px 48px 96px;">
+  <div style="width:48px;height:4px;background:var(--m-stripe);margin-bottom:14px;"></div>
+  <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-strong);">Build your ETK</div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin:20px 0 32px;">
+    <h1 style="margin:0;font-size:44px;line-height:1.02;letter-spacing:-0.025em;font-weight:800;color:var(--text-strong);">{{ cfgHeading }}</h1>
+    <a href="ETK 1300 Configurator.html" style="display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border:1px solid var(--m-blue);color:var(--m-blue);font-size:13px;font-weight:700;white-space:nowrap;">Build the 1300 in 3D</a>
+    <a href="ETK S Configurator.html" style="display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border:1px solid var(--m-blue);color:var(--m-blue);font-size:13px;font-weight:700;white-space:nowrap;">Build the S-Series in 3D</a>
+    <a href="ETK 900 Configurator.html" style="display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border:1px solid var(--m-blue);color:var(--m-blue);font-size:13px;font-weight:700;white-space:nowrap;">Build the 900 in 3D</a>
+    <a href="ETK 800 Configurator.html" style="display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border:1px solid var(--m-blue);color:var(--m-blue);font-size:13px;font-weight:700;white-space:nowrap;">Build the 800 in 3D</a>
+    <a href="ETK K-Series Configurator.html" style="display:inline-flex;align-items:center;min-height:40px;padding:0 18px;border:1px solid var(--m-blue);color:var(--m-blue);font-size:13px;font-weight:700;white-space:nowrap;">Build the K-Series in 3D</a>
+  </div>
+
+  <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Tabs" items="{{ steps }}" value="{{ stepId }}" onChange="{{ setStep }}" hint-size="100%,36px"></x-import>
+
+  <div style="display:grid;grid-template-columns:1fr minmax(280px,360px);gap:48px;margin-top:40px;align-items:start;">
+    <div>
+      <sc-if value="{{ atModel }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:20px;">
+          <sc-for list="{{ cfgFamilies }}" as="m" hint-placeholder-count="8">
+            <x-import component-from-global-scope="ETKDesignSystem_ae95b3.VehicleCard" image="{{ m.img }}" code="{{ m.code }}" name="{{ m.name }}" spec="{{ m.spec }}" price="{{ m.price }}" selected="{{ m.sel }}" onClick="{{ m.go }}" hint-size="100%,290px"></x-import>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ atTrim }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px solid var(--border-hairline);">
+          <sc-for list="{{ trimRows }}" as="t" hint-placeholder-count="5">
+            <x-import component-from-global-scope="ETKDesignSystem_ae95b3.TrimRow" name="{{ t.name }}" detail="{{ t.detail }}" price="{{ t.price }}" selected="{{ t.sel }}" onClick="{{ t.go }}" hint-size="100%,64px"></x-import>
+          </sc-for>
+        </div>
+        <p style="margin:20px 0 0;font-size:14px;line-height:1.55;color:var(--text-muted);max-width:64ch;">{{ trimNote }}</p>
+      </sc-if>
+
+      <sc-if value="{{ atGear }}" hint-placeholder-val="{{ false }}">
+        <div style="border:1px solid var(--border-hairline);">
+          <sc-for list="{{ gearRows }}" as="g" hint-placeholder-count="2">
+            <x-import component-from-global-scope="ETKDesignSystem_ae95b3.TrimRow" name="{{ g.name }}" detail="{{ g.detail }}" price="{{ g.price }}" selected="{{ g.sel }}" onClick="{{ g.go }}" hint-size="100%,64px"></x-import>
+          </sc-for>
+        </div>
+        <p style="margin:20px 0 0;font-size:14px;line-height:1.55;color:var(--text-muted);max-width:64ch;">Consumption and emission figures are determined on the WLTP cycle and depend on transmission, wheel and tyre choice.</p>
+      </sc-if>
+
+      <sc-if value="{{ atColour }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Exterior</div>
+        <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;">
+          <sc-for list="{{ extSwatches }}" as="p" hint-placeholder-count="6">
+            <x-import component-from-global-scope="ETKDesignSystem_ae95b3.ColorSwatch" name="{{ p.name }}" color="{{ p.color }}" finish="{{ p.finish }}" selected="{{ p.sel }}" onClick="{{ p.go }}" hint-size="44px,44px"></x-import>
+          </sc-for>
+        </div>
+        <div style="margin-top:16px;font-size:15px;color:var(--text-strong);">{{ paintName }}</div>
+        <div style="font-size:14px;color:var(--text-muted);">{{ paintPrice }}</div>
+        <div style="margin-top:40px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Interior</div>
+        <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap;">
+          <sc-for list="{{ intSwatches }}" as="p" hint-placeholder-count="4">
+            <x-import component-from-global-scope="ETKDesignSystem_ae95b3.ColorSwatch" name="{{ p.name }}" color="{{ p.color }}" finish="{{ p.finish }}" selected="{{ p.sel }}" onClick="{{ p.go }}" hint-size="44px,44px"></x-import>
+          </sc-for>
+        </div>
+        <div style="margin-top:16px;font-size:15px;color:var(--text-strong);">{{ intName }}</div>
+      </sc-if>
+
+      <sc-if value="{{ atOptions }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;gap:20px;">
+          <sc-for list="{{ optionList }}" as="o" hint-placeholder-count="6">
+            <div style="display:flex;justify-content:space-between;gap:24px;align-items:flex-start;border-bottom:1px solid var(--border-hairline);padding-bottom:20px;">
+              <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Checkbox" label="{{ o.name }}" description="{{ o.detail }}" checked="{{ o.on }}" onChange="{{ o.go }}" hint-size="70%,44px"></x-import>
+              <div style="font-size:14px;color:var(--text-strong);font-variant-numeric:tabular-nums;white-space:nowrap;">{{ o.price }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ atSummary }}" hint-placeholder-val="{{ false }}">
+        <div style="background:var(--surface-sunken);border:1px solid var(--border-hairline);padding:24px;">
+          <img src="{{ cfgImg }}" alt="Your configuration" style="width:100%;max-width:420px;display:block;margin:0 auto;">
+        </div>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecTable" rows="{{ summaryRows }}" style="{{ mt32 }}" hint-size="100%,300px"></x-import>
+        <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;">
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" size="lg" hint-size="180px,48px">Send to a partner</x-import>
+          <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" size="lg" variant="secondary" hint-size="160px,48px">Save configuration</x-import>
+        </div>
+      </sc-if>
+
+      <div style="display:flex;gap:12px;margin-top:40px;">
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" variant="secondary" onClick="{{ prevStep }}" hint-size="100px,40px">Back</x-import>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" onClick="{{ nextStep }}" hint-size="120px,40px">Continue</x-import>
+      </div>
+    </div>
+
+    <aside style="position:sticky;top:96px;background:var(--surface-card);border:1px solid var(--border-hairline);box-shadow:0 2px 8px rgba(11,12,13,.08);">
+      <div style="height:4px;background:var(--m-stripe);"></div>
+      <div style="background:var(--surface-sunken);padding:12px;border-bottom:1px solid var(--border-hairline);">
+        <img src="{{ cfgImg }}" alt="Configuration" style="width:100%;display:block;">
+      </div>
+      <div style="padding:20px;">
+        <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">{{ cfgCode }}</div>
+        <div style="margin-top:6px;font-size:19px;font-weight:700;letter-spacing:-0.012em;color:var(--text-strong);">{{ cfgName }}</div>
+        <div style="margin-top:4px;font-size:13px;color:var(--text-muted);">{{ cfgSpec }}</div>
+        <x-import component-from-global-scope="ETKDesignSystem_ae95b3.SpecTable" rows="{{ sidebarRows }}" dense="true" style="{{ mt20 }}" hint-size="100%,160px"></x-import>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-top:20px;padding-top:16px;border-top:2px solid var(--etk-black);">
+          <span style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);">Total</span>
+          <span style="font-size:24px;font-weight:300;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;color:var(--text-strong);">{{ cfgTotal }}</span>
+        </div>
+        <div style="margin-top:6px;text-align:right;font-size:13px;color:var(--text-muted);font-variant-numeric:tabular-nums;">{{ cfgMonthly }}</div>
+      </div>
+    </aside>
+  </div>
+</main>
+</sc-if>
+
+<footer style="background:var(--etk-graphite-900);color:rgba(255,255,255,0.74);margin-top:0;">
+  <div style="height:4px;background:var(--m-stripe);"></div>
+  <div style="max-width:1280px;margin:0 auto;padding:64px 48px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:40px;">
+    <div>
+      <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#fff;">Models</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;">
+        <a href="#" onClick="{{ goRange }}" style="font-size:14px;color:rgba(255,255,255,0.74);">844 · 854 Saloon and Touring</a>
+        <a href="#" onClick="{{ goRange }}" style="font-size:14px;color:rgba(255,255,255,0.74);">846 · 856 six-cylinder</a>
+        <a href="#" onClick="{{ goRange }}" style="font-size:14px;color:rgba(255,255,255,0.74);">800 XC</a>
+        <a href="#" onClick="{{ goRange }}" style="font-size:14px;color:rgba(255,255,255,0.74);">K-Series Coupé</a>
+        <a href="#" onClick="{{ goRange }}" style="font-size:14px;color:rgba(255,255,255,0.74);">900-Series</a>
+        <a href="#" onClick="{{ goRange }}" style="font-size:14px;color:rgba(255,255,255,0.74);">1300 Touring</a>
+        <a href="#" onClick="{{ goRange }}" style="font-size:14px;color:rgba(255,255,255,0.74);">S-Series</a>
+        <a href="#" onClick="{{ goTt }}" style="font-size:14px;color:rgba(255,255,255,0.74);">ttSport and specials</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#fff;">Build &amp; buy</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;">
+        <a href="#" onClick="{{ goConfig }}" style="font-size:14px;color:rgba(255,255,255,0.74);">Build your ETK</a>
+        <a href="#" onClick="{{ goConfig }}" style="font-size:14px;color:rgba(255,255,255,0.74);">Finance and leasing</a>
+        <a href="#" onClick="{{ goOwners }}" style="font-size:14px;color:rgba(255,255,255,0.74);">Book a test drive</a>
+        <a href="#" onClick="{{ goDealers }}" style="font-size:14px;color:rgba(255,255,255,0.74);">Find a partner</a>
+        <a href="#" onClick="{{ goRange }}" style="font-size:14px;color:rgba(255,255,255,0.74);">Stock vehicles</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#fff;">Owners</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;">
+        <a href="#" onClick="{{ goAccount }}" style="font-size:14px;color:rgba(255,255,255,0.74);">My ETK</a>
+        <a href="#" onClick="{{ goOwners }}" style="font-size:14px;color:rgba(255,255,255,0.74);">Service booking</a>
+        <a href="#" onClick="{{ goOwners }}" style="font-size:14px;color:rgba(255,255,255,0.74);">Roadside assistance</a>
+        <a href="#" onClick="{{ goOwners }}" style="font-size:14px;color:rgba(255,255,255,0.74);">Manuals and downloads</a>
+        <a href="#" onClick="{{ goOwners }}" style="font-size:14px;color:rgba(255,255,255,0.74);">Warranty</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#fff;">Company</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;">
+        <a href="#" onClick="{{ goHeritage }}" style="font-size:14px;color:rgba(255,255,255,0.74);">Heritage</a>
+        <a href="#" onClick="{{ goHeritage }}" style="font-size:14px;color:rgba(255,255,255,0.74);">Engineering</a>
+        <a href="#" onClick="{{ goJobs }}" style="font-size:14px;color:rgba(255,255,255,0.74);">Careers</a>
+        <a href="#" style="font-size:14px;color:rgba(255,255,255,0.74);">Press</a>
+        <a href="#" style="font-size:14px;color:rgba(255,255,255,0.74);">Suppliers</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:#fff;">Legal</div>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px;">
+        <a href="#" style="font-size:14px;color:rgba(255,255,255,0.74);">Imprint</a>
+        <a href="#" style="font-size:14px;color:rgba(255,255,255,0.74);">Privacy</a>
+        <a href="#" onClick="{{ openCookies }}" style="font-size:14px;color:rgba(255,255,255,0.74);">Cookie settings</a>
+        <a href="#" style="font-size:14px;color:rgba(255,255,255,0.74);">Terms of use</a>
+        <a href="#" style="font-size:14px;color:rgba(255,255,255,0.74);">Accessibility</a>
+      </div>
+    </div>
+  </div>
+  <div style="border-top:1px solid var(--etk-graphite-700);">
+    <div style="max-width:1280px;margin:0 auto;padding:24px 48px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;">
+      <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Logo" base="." variant="white" height="{{ n24 }}" wordmark="true" hint-size="90px,24px"></x-import>
+      <div style="font-size:12px;color:rgba(255,255,255,0.5);">© 2026 ETK. Consumption and emission figures are WLTP values. Illustrations may show optional equipment.</div>
+      <div style="font-size:12px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;color:rgba(255,255,255,0.74);">Deutschland · Deutsch / English</div>
+    </div>
+  </div>
+</footer>
+
+<sc-if value="{{ cookieOpen }}" hint-placeholder-val="{{ false }}">
+<div style="position:fixed;left:0;right:0;bottom:0;z-index:80;background:var(--surface-card);border-top:1px solid var(--border-hairline);box-shadow:0 -2px 8px rgba(11,12,13,.08);">
+  <div style="max-width:1280px;margin:0 auto;padding:20px 48px;display:flex;gap:32px;align-items:center;justify-content:space-between;flex-wrap:wrap;">
+    <p style="margin:0;font-size:14px;line-height:1.55;max-width:70ch;color:var(--text-body);">ETK uses cookies that are necessary for the site to function, and optional cookies for measurement and marketing. You can change this at any time under cookie settings.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" variant="secondary" onClick="{{ acceptCookies }}" hint-size="130px,40px">Necessary only</x-import>
+      <x-import component-from-global-scope="ETKDesignSystem_ae95b3.Button" onClick="{{ acceptCookies }}" hint-size="120px,40px">Accept all</x-import>
+    </div>
+  </div>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;navMode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;inline&quot;,&quot;burger&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;'auto' | 'inline' | 'burger'&quot;,&quot;section&quot;:&quot;Navigation&quot;},&quot;headerTreatment&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;solid&quot;,&quot;inverse&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light' | 'solid' | 'inverse'&quot;,&quot;section&quot;:&quot;Navigation&quot;},&quot;accentSignal&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;tricolour&quot;,&quot;blue&quot;,&quot;mono&quot;],&quot;default&quot;:&quot;tricolour&quot;,&quot;tsType&quot;:&quot;'tricolour' | 'blue' | 'mono'&quot;,&quot;section&quot;:&quot;Brand signal&quot;}}">
+class Component extends DCLogic {
+  state = {
+    route: 'home', slide: 0, dealer: 'muc', q: '', term: '48 months',
+    f: { chassis: [], series: [], fuel: [], div: [], pmin: 35000, pmax: 270000 },
+    sp: 0,
+    step: 0, consent: false, cookie: true, menu: false,
+    vw: (typeof window !== 'undefined' ? window.innerWidth : 1280),
+    cfg: { fam: '846', trim: 0, gear: 'std', ext: 0, int: 0, opts: {} },
+    user: this.loadUser(), lmode: 'signin', lf: { name: '', email: '', pw: '' }, lerr: '', pending: null,
+    jobQ: '', jobArea: [], jobLoc: 'All locations', jobOpen: null,
+    cart: {}, shopCat: 'All', order: null, shopPending: false
+  };
+
+  products = [
+    {id:'m1', cat:'Scale models', name:'Kc8 ttSport+ 1:18', note:'Die-cast, opening doors and bonnet', price:189, img:'assets/images/k-series/Ttsport_plus_etkc.webp'},
+    {id:'m2', cat:'Scale models', name:'846 ttSport Heritage 1:43', note:'Resin, gold livery, numbered base', price:79, img:'assets/images/800-series/ETK_846_ttsport_heritage.webp'},
+    {id:'m3', cat:'Scale models', name:'948 Saloon 1:43', note:'Resin, Obsidian Grey', price:69, img:'assets/images/900-series/948_450.jpg'},
+    {id:'a1', cat:'Accessories', name:'All-weather floor mats, 800-Series', note:'Set of four, raised edge', price:129, icon:'layers'},
+    {id:'a2', cat:'Accessories', name:'Roof box 420 l', note:'Fits all Touring roof rails', price:649, icon:'package'},
+    {id:'a3', cat:'Accessories', name:'Winter wheel set, 18 inch', note:'Four wheels with tyres, TPMS fitted', price:1890, icon:'circle-dot'},
+    {id:'c1', cat:'Clothing', name:'ttSport team jacket', note:'Softshell, navy, sizes S–XXL', price:159, icon:'shirt'},
+    {id:'c2', cat:'Clothing', name:'ETK roundel cap', note:'Cotton twill, one size', price:29, icon:'hard-hat'},
+    {id:'e1', cat:'Experiences', name:'Nürburgring driving day', note:'One day, K-Series supplied, instructor included', price:1450, img:'assets/promo/driving-experience.webp'}
+  ];
+
+  setQty(id, d){ this.setState(s => { const c = Object.assign({}, s.cart), q = (c[id] || 0) + d; if (q > 0) c[id] = q; else delete c[id]; return {cart:c, order:null}; }); }
+  placeOrder(){
+    const u = this.state.user;
+    if (!u) { this.setState({shopPending:true, route:'login', lmode:'signin', lerr:''}); window.scrollTo(0, 0); return; }
+    this.setState({cart:{}, order:{no:'W-' + String(Date.now()).slice(-6), email:u.email}});
+  }
+
+  loadUser(){ try { return JSON.parse(localStorage.getItem('etk-user')) || null; } catch (e) { return null; } }
+  saveUser(u){ try { if (u) localStorage.setItem('etk-user', JSON.stringify(u)); else localStorage.removeItem('etk-user'); } catch (e) {} }
+  today(){ const d = new Date(), p = (n) => String(n).padStart(2, '0'); return p(d.getDate()) + '.' + p(d.getMonth() + 1) + '.' + d.getFullYear(); }
+
+  jobs = [
+    {id:'4812', title:'Chassis development engineer, 800-Series', area:'Engineering', loc:'Munich', type:'Full time', start:'01.01.2027',
+     text:'Owns axle kinematics and elastokinematics for the next 800-Series from concept to start of production. Works between simulation, the test rig and the Nürburgring.',
+     reqs:['Degree in mechanical or vehicle engineering','Four years in suspension or chassis development','Experience with multibody simulation']},
+    {id:'4820', title:'Powertrain calibration engineer, V8', area:'Engineering', loc:'Munich', type:'Full time', start:'By arrangement',
+     text:'Calibrates the 4,4 l biturbo V8 for emissions, drivability and ttSport output steps across all markets.',
+     reqs:['Degree in mechanical or electrical engineering','Engine calibration experience on test bench and in vehicle','Driving licence class B']},
+    {id:'4833', title:'NVH test engineer', area:'Engineering', loc:'Munich', type:'Full time', start:'01.02.2027',
+     text:'Measures and resolves noise, vibration and harshness on prototype saloons and Tourings, from the semi-anechoic room to public roads.',
+     reqs:['Degree in acoustics or vehicle engineering','Experience with transfer path analysis','Willingness to travel for winter and summer testing']},
+    {id:'5104', title:'Body-in-white production technician', area:'Production', loc:'Regensburg', type:'Three shifts', start:'By arrangement',
+     text:'Runs and maintains the aluminium joining cells for the 900 and 1300 body shells, including first-line fault diagnosis.',
+     reqs:['Completed apprenticeship in a metal or mechatronics trade','Experience with industrial robots','Shift availability']},
+    {id:'5117', title:'Paint shop quality inspector', area:'Production', loc:'Regensburg', type:'Two shifts', start:'01.12.2026',
+     text:'Signs off every body leaving the top-coat line against the ETK paint standard, including Individual and two-tone finishes.',
+     reqs:['Apprenticeship as vehicle painter or equivalent','Colour-normal vision','Two years in automotive quality control']},
+    {id:'6002', title:'Race engineer, car 28', area:'Motorsport', loc:'Nürburg', type:'Full time', start:'01.01.2027',
+     text:'Leads set-up, data analysis and strategy for the works K-Series Trackday across the endurance season.',
+     reqs:['Five years as race or performance engineer','Fluent in data analysis tools','Available at race weekends']},
+    {id:'6015', title:'Composite technician, ttSport', area:'Motorsport', loc:'Nürburg', type:'Full time', start:'By arrangement',
+     text:'Lays up, cures and repairs carbon components for ttSport road cars and the works race car.',
+     reqs:['Apprenticeship in a composites or boatbuilding trade','Autoclave experience','Workshop precision to 0,1 mm']},
+    {id:'7210', title:'iTronic software engineer', area:'Software', loc:'Munich', type:'Full time · hybrid', start:'By arrangement',
+     text:'Develops navigation and vehicle status features for the iTronic infotainment system, from specification to over-the-air release.',
+     reqs:['Degree in computer science or equivalent experience','Embedded C++ or Kotlin','Experience with automotive software processes']},
+    {id:'7304', title:'Colour and trim designer', area:'Design', loc:'Munich', type:'Full time', start:'01.03.2027',
+     text:'Defines paint, leather and trim for the model year 2029 range and for the Individual programme.',
+     reqs:['Degree in textile, industrial or transportation design','Portfolio of production work','Knowledge of automotive material specifications']},
+    {id:'8001', title:'Apprenticeship, automotive mechatronics', area:'Apprenticeships', loc:'Regensburg', type:'3,5 years', start:'01.09.2027',
+     text:'Three and a half years between the works training centre and the assembly hall. Apprentices build one complete car in their final year.',
+     reqs:['Secondary school certificate','Interest in mechanics and electronics','Minimum age 16 at start']}
+  ];
+
+  submitLogin(e){
+    if (e && e.preventDefault) e.preventDefault();
+    const st = this.state, lf = st.lf, create = st.lmode === 'create';
+    const email = lf.email.trim();
+    if (create && !lf.name.trim()) return this.setState({lerr:'Enter your full name.'});
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return this.setState({lerr:'Enter a valid email address.'});
+    if (lf.pw.length < 6) return this.setState({lerr:'The password needs at least six characters.'});
+    const prev = this.loadUser();
+    const derived = email.split('@')[0].split(/[._-]+/).filter(Boolean).map(w => w[0].toUpperCase() + w.slice(1)).join(' ');
+    let h = 0; for (let i = 0; i < email.length; i++) h = (h * 31 + email.charCodeAt(i)) % 900000;
+    const u = (prev && prev.email === email) ? prev : {name:create ? lf.name.trim() : (derived || 'ETK customer'), email:email, cust:'C-' + (100000 + h), apps:[]};
+    let route = st.shopPending ? 'shop' : 'account', jobOpen = st.jobOpen;
+    if (st.pending) { if (!u.apps.some(a => a.id === st.pending)) u.apps = u.apps.concat([{id:st.pending, date:this.today()}]); route = 'jobs'; jobOpen = st.pending; }
+    this.saveUser(u);
+    this.setState({user:u, route:route, jobOpen:jobOpen, pending:null, shopPending:false, lerr:'', lf:{name:'', email:'', pw:''}});
+    window.scrollTo(0, 0);
+  }
+
+  applyJob(id){
+    const u = this.state.user;
+    if (!u) { this.setState({pending:id, route:'login', lmode:'signin', lerr:''}); window.scrollTo(0, 0); return; }
+    if (u.apps.some(a => a.id === id)) return;
+    const nu = Object.assign({}, u, {apps:u.apps.concat([{id:id, date:this.today()}])});
+    this.saveUser(nu); this.setState({user:nu});
+  }
+
+  specials = [
+    {fam:'800sp', ti:0, series:'800-Series', code:'846 · 856 Heritage', name:'Heritage', img:'assets/images/800-series/ETK_846_ttsport_heritage.webp',
+     text:'The biturbo V8 in two output steps, the gold livery as standard and bronze as the option. Sunroof fitted from the works; a numbered plaque sits on the sill.'},
+    {fam:'800sp', ti:1, series:'800-Series', code:'846x · 856x Rennspecht', name:'Rennspecht', img:'assets/promo/track-exit.webp',
+     text:'All-wheel drive, two engines, one purpose. Chrome wheels and the black stripe are the only cosmetic options offered on the run.'},
+    {fam:'800sp', ti:2, series:'800-Series', code:'846 Knallhart', name:'Knallhart', img:'assets/promo/motorsport-front.webp',
+     text:'710 PS from the 3,0 l six, driving the rear axle alone, released to 375 km/h. Delivered in one specification with no interior or exterior options.'},
+    {fam:'ksp', ti:0, series:'K-Series', code:'Kc6 Trackday', name:'Trackday', img:'assets/promo/track-hairpin.webp',
+     text:'The works entry, sold as it races. All-wheel drive, eight-speed automatic, one specification and no option list.'},
+    {fam:'ksp', ti:1, series:'K-Series', code:'Kc8 Drift', name:'Drift', img:'assets/images/k-series/Ttsport_plus_etkc.webp',
+     text:'734 PS through a six-speed manual to the rear axle. Offered in Trance Violet, Magnetic Red and Bermude Blue only.'},
+    {fam:'ksp', ti:2, series:'K-Series', code:'Kc8 Heritage', name:'Heritage', img:'assets/promo/bronze-coupe.webp',
+     text:'The coupé in the gold livery, with bronze offered against the run. Carbon roof replaces the standard sunroof on request.'},
+    {fam:'ksp', ti:3, series:'K-Series', code:'Kc8 Rennspecht', name:'Rennspecht', img:'assets/images/k-series/Ttsport_heritage_etkc.webp',
+     text:'Two engines, all-wheel drive, 330 km/h. Obsidian Grey is the standard finish; the black stripe runs the length of the car.'}
+  ];
+
+  priceFloor = 35000;
+  priceCeil = 270000;
+
+  chassisMap = {
+    '844':['Saloon','Touring'], '846':['Saloon','Touring'], 'xc':['Touring'],
+    '800tt':['Saloon','Touring'], '800sp':['Saloon','Touring'],
+    'k':['Coupé'], 'ktt':['Coupé'], 'ksp':['Coupé'],
+    '900':['Saloon','Touring'], '900sp':['Saloon','Touring'],
+    '1300':['Touring'], '1300sp':['Touring'],
+    's':['Saloon','Long wheelbase'], 'ssp':['Saloon','Long wheelbase']
+  };
+
+  B = 'assets/images/800-series/';
+  K = 'assets/images/k-series/';
+  P = 'assets/promo/';
+
+  paintBook = {
+    white:{name:'White',hex:'#f2f3f4',finish:'solid',d:0},
+    black:{name:'Black',hex:'#15171a',finish:'solid',d:0},
+    red:{name:'Red',hex:'#a3192a',finish:'solid',d:900},
+    orange:{name:'Orange',hex:'#d2601a',finish:'solid',d:900},
+    green:{name:'Green',hex:'#2f5d3a',finish:'solid',d:900},
+    blue:{name:'Blue',hex:'#17407a',finish:'solid',d:900},
+    gray:{name:'Gray',hex:'#7a8085',finish:'metallic',d:1100},
+    obsidian:{name:'Obsidian Grey',hex:'#3a3e42',finish:'metallic',d:0},
+    scarlet:{name:'Scarlet Red',hex:'#c8102e',finish:'metallic',d:1300},
+    crimson:{name:'Crimson Red',hex:'#7e1220',finish:'metallic',d:1300},
+    sunset:{name:'Sunset Mica',hex:'#c0752e',finish:'mica',d:1600},
+    technetium:{name:'Technetium',hex:'#8e9295',finish:'metallic',d:1600},
+    mineral:{name:'Mineral Green',hex:'#46574a',finish:'metallic',d:1300},
+    diamond:{name:'Black Diamond',hex:'#121416',finish:'metallic',d:1900},
+    metgreen:{name:'Metallic Green',hex:'#2f4a3a',finish:'metallic',d:0},
+    trance:{name:'Trance Violet',hex:'#6e2c8f',finish:'metallic',d:2400},
+    magnetic:{name:'Magnetic Red',hex:'#c8102e',finish:'metallic',d:2400},
+    bermude:{name:'Bermude Blue',hex:'#0066b1',finish:'metallic',d:2400}
+  };
+
+  intBook = {
+    white:{name:'White',hex:'#eceded'},
+    beige:{name:'Beige',hex:'#c9bba2'},
+    brown:{name:'Brown',hex:'#5a3b2a'},
+    black:{name:'Black',hex:'#1a1b1d'},
+    tt:{name:'ttSport',hex:'#101828'}
+  };
+
+  fams = [
+    {
+      id:'844', code:'844 · 854', name:'Saloon and Touring', series:'800-Series', kind:'core', s:8,
+      img:'Etk_844_150.webp', engine:'2,0 l I4 · turbocharged',
+      blurb:'The entry to the 800-Series. Seven trims, four of them petrol, all on the same 2,0 l four-cylinder.',
+      trims:[
+        {code:'150',ps:'155',nm:'242',vmax:'210 km/h',fuel:'Gasoline',drive:'RWD',std:'6-speed manual',opt:null,price:38900},
+        {code:'190',ps:'196',nm:'283',vmax:'230 km/h',fuel:'Gasoline',drive:'RWD',std:'6-speed manual',opt:{name:'8-speed automatic',d:2400},price:42400},
+        {code:'250',ps:'255',nm:'362',vmax:'250 km/h',fuel:'Gasoline',drive:'RWD',std:'6-speed manual',opt:{name:'8-speed automatic',d:2400},price:47900},
+        {code:'250 AWD',ps:'255',nm:'362',vmax:'250 km/h',fuel:'Gasoline',drive:'AWD',std:'6-speed manual',opt:{name:'8-speed automatic',d:2400},price:50700},
+        {code:'150d',ps:'153',nm:'322',vmax:'210 km/h',fuel:'Diesel',drive:'RWD',std:'6-speed manual',opt:null,price:41200},
+        {code:'190d',ps:'193',nm:'405',vmax:'230 km/h',fuel:'Diesel',drive:'RWD',std:'6-speed manual',opt:{name:'8-speed automatic',d:2400},price:44800},
+        {code:'190d AWD',ps:'193',nm:'405',vmax:'230 km/h',fuel:'Diesel',drive:'AWD',std:'6-speed manual',opt:{name:'8-speed automatic',d:2400},price:47600}
+      ],
+      ext:['white','black','red','orange','green','blue'], int:['white','beige','brown','black'],
+      options:[
+        {name:'Sport exhaust',detail:'250 and 250 AWD only',d:1400},
+        {name:'Sunroof',detail:'Electrically operated blind',d:1500},
+        {name:'Body-color lip',detail:'Front lip, painted to body',d:600},
+        {name:'Carbon-fibre lip',detail:'250 and 250 AWD only',d:1900},
+        {name:'Carbon roof',detail:'250 and 250 AWD only',d:3400},
+        {name:'Tow bar',detail:'Detachable, 1 800 kg braked',d:900}
+      ],
+      notes:['White is the standard interior colour.','White and Black are the standard exterior colours.','Carbon-fibre lip and carbon roof are available on the 250 and 250 AWD.']
+    },
+    {
+      id:'846', code:'846 · 856', name:'Six-cylinder Saloon and Touring', series:'800-Series', kind:'core', s:8,
+      img:'ETK_856x_340.webp', engine:'3,0 l I6 · turbocharged',
+      blurb:'Two output steps on each code. The 367 PS petrol can be released to 290 km/h; the diesel stays at 250.',
+      trims:[
+        {code:'340',ps:'305 / 367',nm:'407 / 464',vmax:'250 / 290 km/h',fuel:'Gasoline',drive:'RWD',std:'8-speed automatic',opt:{name:'6-speed manual',d:0},price:62400},
+        {code:'340 AWD',ps:'305 / 367',nm:'407 / 464',vmax:'250 / 290 km/h',fuel:'Gasoline',drive:'AWD',std:'8-speed automatic',opt:{name:'6-speed manual',d:0},price:65200},
+        {code:'310d',ps:'265 / 313',nm:'569 / 619',vmax:'250 km/h',fuel:'Diesel',drive:'RWD',std:'8-speed automatic',opt:{name:'6-speed manual',d:0},price:59800},
+        {code:'310d AWD',ps:'265 / 313',nm:'569 / 619',vmax:'250 km/h',fuel:'Diesel',drive:'AWD',std:'8-speed automatic',opt:{name:'6-speed manual',d:0},price:62600}
+      ],
+      ext:['obsidian','scarlet','crimson','sunset','technetium','mineral'], int:['white','beige','brown','black','tt'],
+      options:[
+        {name:'ttSport package',detail:'Widened track, adaptive dampers, lettering',d:6900},
+        {name:'Oval exhaust tips',detail:'In place of the dual round tips',d:800},
+        {name:'Sport+ mode',detail:'Second stability threshold, exhaust flaps',d:1200},
+        {name:'290 km/h top speed extension',detail:'367 PS petrol only',d:2900},
+        {name:'Body-color lip',detail:'Saloon only',d:600},
+        {name:'Carbon-fibre lip',detail:'Saloon only',d:1900},
+        {name:'Sunroof',detail:'Two-panel, electrically operated blind',d:1500},
+        {name:'Carbon roof',detail:'In place of the sunroof',d:3400},
+        {name:'Roof bars',detail:'Touring only',d:700},
+        {name:'Tow bar',detail:'Detachable, 2 000 kg braked',d:900}
+      ],
+      notes:['290 km/h top speed extension is only available for the 367 PS gasoline model.','Lips are only available for the sedan version.','White is the standard interior colour. Obsidian Grey is the standard exterior colour.']
+    },
+    {
+      id:'xc', code:'800 XC', name:'Raised all-terrain Touring', series:'800-Series', kind:'core', s:8,
+      img:'ETK_856xc_300.webp', engine:'3,0 l I6 · turbocharged',
+      blurb:'Two trims, both all-wheel drive, both on the six-cylinder. Raised ride height and body cladding as standard.',
+      trims:[
+        {code:'XC 300',ps:'316',nm:'412',vmax:'250 km/h',fuel:'Gasoline',drive:'AWD',std:'8-speed automatic',opt:{name:'6-speed manual',d:0},price:61800},
+        {code:'XC 260d',ps:'269',nm:'569',vmax:'250 km/h',fuel:'Diesel',drive:'AWD',std:'8-speed automatic',opt:{name:'6-speed manual',d:0},price:59400}
+      ],
+      ext:['white','black','red','orange','green','blue','gray'], int:['white','beige','brown','black'],
+      options:[
+        {name:'ttSport exhaust',detail:'Optional on both trims',d:2200},
+        {name:'ttSport seats',detail:'Electrically adjustable, memory for two',d:2600},
+        {name:'ttSport interior',detail:'Dark trim, contrast stitch',d:3800},
+        {name:'Sport+ mode',detail:'Second stability threshold',d:1200},
+        {name:'Sunroof',detail:'Two-panel, electrically operated blind',d:1500},
+        {name:'Roof bars',detail:'Anodised, 100 kg dynamic load',d:700},
+        {name:'Tow bar',detail:'Detachable, 2 400 kg braked',d:900},
+        {name:'Halogen lights',detail:'In place of the standard xenon units',d:0}
+      ],
+      notes:['White is the standard interior colour.','White and Black are the standard exterior colours.']
+    },
+    {
+      id:'800tt', code:'800 ttSport', name:'ttSport Saloon and Touring', series:'800-Series', kind:'tt', s:8,
+      img:'ETK_846tt_340.webp', engine:'3,0 l I6 / 4,4 l V8',
+      blurb:'The performance works takes the six-cylinder to 466 PS and offers the V8 in three output steps.',
+      trims:[
+        {code:'ttSport',ps:'466',nm:'567',vmax:'250 km/h · 300 optional',fuel:'Gasoline',drive:'RWD / AWD',std:'7-speed ttSport automatic',opt:{name:'6-speed manual',d:0},price:89500},
+        {code:'ttSport+',ps:'475 / 556 / 604',nm:'452 / 682 / 708',vmax:'250 km/h · 330 optional',fuel:'Gasoline',drive:'RWD / AWD',std:'7-speed ttSport automatic',opt:{name:'6-speed manual',d:0},price:108900}
+      ],
+      ext:['metgreen','trance','magnetic','bermude'], int:['black','tt','brown'],
+      options:[
+        {name:'Race limited-slip differential(s)',detail:'ttSport trim only',d:3900},
+        {name:'Sport+ mode',detail:'ttSport trim only',d:1200},
+        {name:'Oval exhaust tips',detail:'In place of the dual round tips',d:800},
+        {name:'Carbon-fibre lip',detail:'Saloon only',d:1900},
+        {name:'300 km/h top speed extension',detail:'Both trims',d:2500},
+        {name:'330 km/h top speed extension',detail:'Turbocharged V8 only',d:4500},
+        {name:'Tow bar',detail:'Detachable, 2 000 kg braked',d:900}
+      ],
+      notes:['330 km/h is only available for the turbocharged V8.','Lips are only available for the sedan version. All sedans come with a body-colored lip.','Metallic Green is the standard exterior colour.']
+    },
+    {
+      id:'800sp', code:'800 Specials', name:'Heritage, Rennspecht, Knallhart', series:'800-Series', kind:'special', s:8,
+      img:'ETK_846_ttsport_heritage.webp', engine:'4,4 l V8 / 3,0 l I6',
+      blurb:'Three limited builds. The Knallhart takes the six-cylinder to 710 PS and 375 km/h and drives the rear axle alone.',
+      trims:[
+        {code:'Heritage',ps:'556 / 604',nm:'682 / 708',vmax:'330 km/h',fuel:'Gasoline',drive:'RWD / AWD',std:'8-speed automatic',opt:{name:'6-speed manual',d:0},price:124000},
+        {code:'Rennspecht',ps:'510 / 632',nm:'459 / 787',vmax:'330 km/h',fuel:'Gasoline',drive:'AWD',std:'8-speed automatic',opt:null,price:136500},
+        {code:'Knallhart',ps:'710',nm:'790',vmax:'375 km/h',fuel:'Gasoline',drive:'RWD',std:'7-speed ttSport automatic',opt:null,price:158000}
+      ],
+      ext:['diamond','scarlet','crimson','sunset','technetium','mineral'], int:['white','beige','brown','black','tt'],
+      options:[
+        {name:'Bronze Heritage livery',detail:'Heritage only. The standard livery is gold',d:4900},
+        {name:'Drift mode',detail:'Heritage only',d:1600},
+        {name:'Oval exhaust tips',detail:'Heritage only',d:800},
+        {name:'Body-color lip',detail:'Heritage saloon only',d:600},
+        {name:'Carbon-fibre lip',detail:'Heritage saloon only',d:1900},
+        {name:'Carbon roof',detail:'Heritage only. Sunroof is standard',d:3400},
+        {name:'Chrome wheels',detail:'Rennspecht only',d:2600},
+        {name:'Black Rennspecht stripe',detail:'Rennspecht only',d:1400}
+      ],
+      notes:['The standard Heritage livery is gold.','Lips are only available for the sedan version. Sunroof is standard on the Heritage.','The Knallhart is delivered in one specification. No interior or exterior options are offered.']
+    },
+    {
+      id:'k', code:'K-Series', name:'Two-seat Coupé', series:'K-Series', kind:'core', s:0,
+      img:'Kc6_360.webp', engine:'2,0 l I4 / 3,0 l I6 · turbocharged',
+      blurb:'Five trims on the shortened 800 platform. The six-cylinder cars carry the ttSport transmission as standard.',
+      trims:[
+        {code:'190',ps:'201',nm:'286',vmax:'230 km/h',fuel:'Gasoline',drive:'RWD',std:'8-speed automatic',opt:{name:'6-speed manual',d:0},price:52900},
+        {code:'250',ps:'262',nm:'366',vmax:'230 km/h',fuel:'Gasoline',drive:'RWD',std:'8-speed automatic',opt:{name:'6-speed manual',d:0},price:58400},
+        {code:'230d',ps:'233',nm:'452',vmax:'230 km/h',fuel:'Diesel',drive:'RWD',std:'8-speed automatic',opt:{name:'6-speed manual',d:0},price:55700},
+        {code:'310d',ps:'313',nm:'619',vmax:'250 km/h',fuel:'Diesel',drive:'RWD / AWD',std:'7-speed ttSport automatic',opt:{name:'6-speed manual',d:0},price:64900},
+        {code:'360',ps:'367',nm:'464',vmax:'250 km/h',fuel:'Gasoline',drive:'RWD / AWD',std:'7-speed ttSport automatic',opt:{name:'6-speed manual',d:0},price:71400}
+      ],
+      ext:['white','black','red','orange','green','blue'], int:['white','beige','brown','black','tt'],
+      options:[
+        {name:'Sport exhaust',detail:'310d and 360 only',d:1400},
+        {name:'Sunroof',detail:'Single panel, electrically operated',d:1500},
+        {name:'Carbon-fibre roof',detail:'In place of the sunroof',d:3400},
+        {name:'Carbon-fibre lip',detail:'Front lip in exposed weave',d:1900},
+        {name:'Carbon-fibre spoiler',detail:'Boot-lid spoiler in exposed weave',d:2200},
+        {name:'Sport+ mode',detail:'190, 250 and 230d only',d:1200},
+        {name:'ttSport seats',detail:'190, 250 and 230d only',d:2600},
+        {name:'290 km/h top speed extension',detail:'310d and 360 only',d:2900},
+        {name:'Tow bar',detail:'Detachable, 1 500 kg braked',d:900}
+      ],
+      notes:['White is the standard interior colour.','White and Black are the standard exterior colours.','The ttSport interior is offered on the 310d and the 360.']
+    },
+    {
+      id:'ktt', code:'K ttSport', name:'ttSport Coupé', series:'K-Series', kind:'tt', s:0,
+      img:'Kc8_ttsport.webp', engine:'4,4 l V8 · turbocharged',
+      blurb:'Both trims run the biturbo V8 through the seven-speed ttSport automatic. The plus car is released to 330 km/h from the works.',
+      trims:[
+        {code:'ttSport',ps:'466',nm:'567',vmax:'300 km/h',fuel:'Gasoline',drive:'RWD / AWD',std:'7-speed ttSport automatic',opt:{name:'6-speed manual',d:0},price:94700},
+        {code:'ttSport+',ps:'604',nm:'708',vmax:'330 km/h',fuel:'Gasoline',drive:'RWD / AWD',std:'7-speed ttSport automatic',opt:{name:'6-speed manual',d:0},price:114700}
+      ],
+      ext:['metgreen','trance','magnetic','bermude'], int:['black','tt','brown'],
+      options:[
+        {name:'Race limited-slip differential(s)',detail:'ttSport trim only',d:3900},
+        {name:'Sport+ mode',detail:'ttSport trim only',d:1200},
+        {name:'Oval exhaust tips',detail:'In place of the dual round tips',d:800},
+        {name:'Carbon-fibre lip',detail:'Front lip in exposed weave',d:1900},
+        {name:'Carbon-fibre spoiler',detail:'Boot-lid spoiler in exposed weave',d:2200},
+        {name:'Tow bar',detail:'Detachable, 1 500 kg braked',d:900}
+      ],
+      notes:['Metallic Green is the standard exterior colour.','All coupés leave the works with a body-colored lip.']
+    },
+    {
+      id:'ksp', code:'K Specials', name:'Trackday, Drift, Heritage, Rennspecht', series:'K-Series', kind:'special', s:0,
+      img:'Ttsport_heritage_etkc.webp', engine:'3,0 l I6 / 4,4 l V8',
+      blurb:'Four builds for one purpose each. The Drift carries 734 PS and a six-speed manual to the rear axle alone.',
+      trims:[
+        {code:'Trackday',ps:'471',nm:'575',vmax:'310 km/h',fuel:'Gasoline',drive:'AWD',std:'8-speed automatic',opt:null,price:121000},
+        {code:'Drift',ps:'734',nm:'820',vmax:'290 km/h',fuel:'Gasoline',drive:'RWD',std:'6-speed manual',opt:null,price:139500},
+        {code:'Heritage',ps:'556 / 604',nm:'682 / 708',vmax:'330 km/h',fuel:'Gasoline',drive:'RWD / AWD',std:'8-speed automatic',opt:{name:'6-speed manual',d:0},price:128000},
+        {code:'Rennspecht',ps:'510 / 632',nm:'459 / 787',vmax:'330 km/h',fuel:'Gasoline',drive:'AWD',std:'8-speed automatic',opt:null,price:141000}
+      ],
+      ext:['diamond','scarlet','crimson','sunset','technetium','mineral','trance','magnetic','bermude'], int:['white','beige','brown','black','tt'],
+      options:[
+        {name:'Bronze Heritage livery',detail:'Heritage only. The standard livery is gold',d:4900},
+        {name:'Drift mode',detail:'Heritage only',d:1600},
+        {name:'Oval exhaust tips',detail:'Heritage only',d:800},
+        {name:'Carbon-fibre lip',detail:'Heritage only',d:1900},
+        {name:'Carbon roof',detail:'Heritage only. Sunroof is standard',d:3400},
+        {name:'Chrome wheels',detail:'Rennspecht only',d:2600},
+        {name:'Black Rennspecht stripe',detail:'Rennspecht only',d:1400}
+      ],
+      notes:['The Trackday is delivered in one specification and carries no colour or option list.','The Drift is offered in Trance Violet, Magnetic Red and Bermude Blue.','The standard Heritage livery is gold. Obsidian Grey is the standard exterior colour on Heritage and Rennspecht.']
+    },
+    {
+      id:'900', code:'940 · 944 · 948', name:'Executive Saloon and Touring', series:'900-Series', kind:'core', dir:'assets/images/900-series/',
+      img:'948_450.jpg', engine:'2,0 l I4 to 6,3 l V12 · hybrid and electric',
+      blurb:'Eight trims across petrol, diesel, hybrid and battery-electric drive. Every combustion trim is offered with rear- or all-wheel drive.',
+      trims:[
+        {code:'250 ActiveHybrid',ps:'475',nm:'565',vmax:'250 km/h',fuel:'Hybrid',drive:'RWD / AWD',std:'8-speed ActiveHybrid automatic',opt:null,price:78900},
+        {code:'250 MHEV',ps:'262',nm:'366',vmax:'250 km/h',fuel:'Hybrid',drive:'RWD / AWD',std:'8-speed mild-hybrid automatic',opt:null,price:69400},
+        {code:'340',ps:'346',nm:'464',vmax:'250 km/h',fuel:'Gasoline',drive:'RWD / AWD',std:'8-speed automatic',opt:null,price:76800},
+        {code:'450',ps:'453',nm:'652',vmax:'310 km/h',fuel:'Gasoline',drive:'RWD / AWD',std:'8-speed automatic',opt:null,price:94500},
+        {code:'520',ps:'580',nm:'885',vmax:'350 km/h',fuel:'Gasoline',drive:'RWD / AWD',std:'8-speed automatic',opt:null,price:128000},
+        {code:'230d MHEV',ps:'233',nm:'452',vmax:'230 km/h',fuel:'Diesel',drive:'RWD / AWD',std:'8-speed mild-hybrid automatic',opt:null,price:71200},
+        {code:'300d MHEV',ps:'313',nm:'619',vmax:'250 km/h',fuel:'Diesel',drive:'RWD / AWD',std:'8-speed mild-hybrid automatic',opt:null,price:79600},
+        {code:'450e',ps:'469',nm:'687',vmax:'250 km/h',fuel:'Electric',drive:'AWD',std:'Single-speed reduction gear',opt:null,price:99900}
+      ],
+      ext:['white','obsidian','diamond','technetium','scarlet','mineral','bermude','sunset'], int:['black','white','beige','brown'],
+      options:[],
+      notes:['The 250 MHEV, 230d MHEV and 300d MHEV carry a 6 kWh battery.','The 450e runs one electric motor per axle, with an 85 or 100 kWh battery.']
+    },
+    {
+      id:'900sp', code:'900 Specials', name:'Heritage, Rennspecht 9R, Tuningstudio', series:'900-Series', kind:'special', dir:'assets/images/900-series/',
+      img:'rennspecht_9R_V12.jpg', engine:'4,4 l V8 / 6,3 l V12',
+      blurb:'Five limited builds. The Tuningstudio sends 841 PS through a six-speed manual to the rear axle and is released to 370 km/h.',
+      trims:[
+        {code:'Heritage',ps:'556',nm:'682',vmax:'310 km/h',fuel:'Hybrid',drive:'RWD',std:'8-speed mild-hybrid automatic',opt:null,price:139000},
+        {code:'Rennspecht 9R V8',ps:'510',nm:'459',vmax:'290 km/h',fuel:'Gasoline',drive:'RWD',std:'6-speed manual',opt:null,price:148000},
+        {code:'Rennspecht 9R V12',ps:'818',nm:'1 219',vmax:'330 km/h',fuel:'Gasoline',drive:'AWD',std:'7-speed ttSport dual-clutch automatic',opt:null,price:219000},
+        {code:'Rennspecht 9R V12 MHEV',ps:'981',nm:'1 359',vmax:'330 km/h',fuel:'Hybrid',drive:'AWD',std:'8-speed mild-hybrid automatic',opt:null,price:249000},
+        {code:'Tuningstudio',ps:'841',nm:'1 303',vmax:'370 km/h',fuel:'Gasoline',drive:'RWD',std:'6-speed manual',opt:null,price:265000}
+      ],
+      ext:['diamond','scarlet','crimson','sunset','technetium','mineral'], int:['black','tt','brown'],
+      options:[],
+      notes:['The Heritage and the Rennspecht 9R V12 MHEV carry a 6 kWh battery.','The Rennspecht 9R V8 is naturally aspirated.']
+    },
+    {
+      id:'1300', code:'1354 · 1356 · 1358', name:'Touring', series:'1300-Series', kind:'core', dir:'assets/images/1300-series/',
+      img:'1356x_310d_A.jpg', engine:'2,0 l I4 to 4,4 l V8 · turbocharged',
+      blurb:'Five trims from the four-cylinder 1354 to the V8 1358 ttSport. Rear-wheel drive as standard, xMatic on every trim.',
+      trims:[
+        {code:'190',ps:'201',nm:'286',vmax:'230 km/h',fuel:'Gasoline',drive:'RWD / AWD',std:'8-speed automatic',opt:{name:'6-speed manual',d:0},price:44900},
+        {code:'260d',ps:'269',nm:'569',vmax:'250 km/h',fuel:'Diesel',drive:'RWD / AWD',std:'8-speed automatic',opt:{name:'6-speed manual',d:0},price:52400},
+        {code:'340',ps:'367',nm:'464',vmax:'250 km/h',fuel:'Gasoline',drive:'RWD / AWD',std:'8-speed automatic',opt:{name:'6-speed manual',d:0},price:58900},
+        {code:'450',ps:'466',nm:'567',vmax:'250 km/h',fuel:'Gasoline',drive:'RWD / AWD',std:'8-speed automatic',opt:{name:'6-speed manual',d:0},price:79800},
+        {code:'490 ttSport',ps:'604',nm:'708',vmax:'300 km/h',fuel:'Gasoline',drive:'RWD / AWD',std:'8-speed automatic',opt:{name:'6-speed manual',d:0},price:98600}
+      ],
+      ext:['white','obsidian','diamond','technetium','scarlet','mineral','bermude','sunset'], int:['black','white','beige','brown'],
+      options:[],
+      notes:[]
+    },
+    {
+      id:'1300sp', code:'1300 Specials', name:'Rennspecht, Rennspecht SR, Heritage, Exclusive', series:'1300-Series', kind:'special', dir:'assets/images/1300-series/',
+      img:'rennspecht_13r_A.jpg', engine:'4,2 l V8 to 6,6 l V12',
+      blurb:'Four builds, all xMatic, all released to 330 km/h. The Rennspecht SR carries the 6,6 l twin-turbo V12.',
+      trims:[
+        {code:'Rennspecht',ps:'662',nm:'818',vmax:'330 km/h',fuel:'Gasoline',drive:'AWD',std:'7-speed ttSport automatic',opt:null,price:132000},
+        {code:'Rennspecht SR',ps:'725',nm:'928',vmax:'330 km/h',fuel:'Gasoline',drive:'AWD',std:'7-speed ttSport automatic',opt:null,price:168000},
+        {code:'Heritage',ps:'583',nm:'706',vmax:'330 km/h',fuel:'Gasoline',drive:'AWD',std:'7-speed ttSport automatic',opt:null,price:124000},
+        {code:'Exclusive',ps:'583',nm:'706',vmax:'330 km/h',fuel:'Gasoline',drive:'AWD',std:'8-speed automatic',opt:null,price:118000},
+        {code:'Exclusive d',ps:'538',nm:'1 108',vmax:'330 km/h',fuel:'Diesel',drive:'AWD',std:'8-speed automatic',opt:null,price:116000}
+      ],
+      ext:['diamond','scarlet','crimson','sunset','technetium','mineral'], int:['black','tt','brown'],
+      options:[],
+      notes:['The Exclusive is offered with the 4,4 l V8 petrol or the 4,2 l V8 diesel.']
+    },
+    {
+      id:'s', code:'S4 · S6 · S8 · S12', name:'Saloon and Long wheelbase', series:'S-Series', kind:'core', dir:'assets/images/s-series/',
+      img:'sl4x_250_A.jpg', engine:'2,0 l I4 to 6,6 l V12',
+      blurb:'The flagship saloon, in standard or long wheelbase. Five trims from the four-cylinder S4 to the twin-turbo S12.',
+      trims:[
+        {code:'S4 250',ps:'258',nm:'400',vmax:'250 km/h',fuel:'Gasoline',drive:'RWD / AWD',std:'8-speed automatic',opt:null,price:96400},
+        {code:'S6 300',ps:'340',nm:'450',vmax:'250 km/h',fuel:'Gasoline',drive:'RWD / AWD',std:'8-speed automatic',opt:null,price:104900},
+        {code:'S6 310d',ps:'320',nm:'680',vmax:'250 km/h',fuel:'Diesel',drive:'RWD / AWD',std:'8-speed automatic',opt:null,price:106200},
+        {code:'S8 450',ps:'530',nm:'750',vmax:'250 km/h',fuel:'Gasoline',drive:'RWD / AWD',std:'8-speed automatic',opt:null,price:121800},
+        {code:'S12 580',ps:'610',nm:'850',vmax:'250 km/h',fuel:'Gasoline',drive:'RWD / AWD',std:'8-speed automatic',opt:null,price:164500}
+      ],
+      ext:['white','obsidian','diamond','technetium','scarlet','mineral','bermude','sunset'], int:['black','white','beige','brown'],
+      options:[],
+      notes:[]
+    },
+    {
+      id:'ssp', code:'S Specials', name:'Rennspecht SR, ttSport GT, GTR, GT-S Heritage, Exclusive', series:'S-Series', kind:'special', dir:'assets/images/s-series/',
+      img:'ss12x_ttsportgtr_DCT.jpg', engine:'4,4 l V8 / 6,6 l V12',
+      blurb:'Five builds. The ttSport GTR takes the V12 to 704 PS through the seven-speed dual-clutch; the Exclusive is built on the long wheelbase only.',
+      trims:[
+        {code:'Rennspecht SR',ps:'632',nm:'787',vmax:'330 km/h',fuel:'Gasoline',drive:'AWD',std:'8-speed automatic',opt:null,price:189000},
+        {code:'ttSport GT',ps:'668',nm:'856',vmax:'330 km/h',fuel:'Gasoline',drive:'RWD',std:'7-speed ttSport dual-clutch automatic',opt:null,price:198000},
+        {code:'ttSport GTR',ps:'704',nm:'903',vmax:'330 km/h',fuel:'Gasoline',drive:'AWD',std:'7-speed ttSport dual-clutch automatic',opt:null,price:229000},
+        {code:'ttSport GT-S Heritage',ps:'604',nm:'708',vmax:'330 km/h',fuel:'Gasoline',drive:'AWD',std:'7-speed ttSport dual-clutch automatic',opt:null,price:176000},
+        {code:'Exclusive',ps:'585',nm:'765',vmax:'250 km/h',fuel:'Gasoline',drive:'AWD',std:'8-speed automatic',opt:null,price:212000}
+      ],
+      ext:['diamond','scarlet','crimson','sunset','technetium','mineral'], int:['black','tt','brown'],
+      options:[],
+      notes:['The Exclusive is built on the long wheelbase only. Top speed is electronically limited.']
+    }
+  ];
+
+  ttCards = [
+    {img:'ETK_846tt_340.webp',s:8,code:'846 ttSport',name:'ttSport Saloon',spec:'3,0 l I6 · 466 PS · 567 N·m',price:'from 89 500 EUR'},
+    {img:'ETK_846x_ttsport_plus.webp',s:8,code:'846x ttSport+',name:'ttSport Saloon xMatic',spec:'4,4 l V8 · 604 PS · 708 N·m',price:'from 108 900 EUR'},
+    {img:'ETK_856_ttsport.webp',s:8,code:'856 ttSport',name:'ttSport Touring',spec:'3,0 l I6 · 466 PS · 567 N·m',price:'from 92 300 EUR'},
+    {img:'Kc8_ttsport.webp',s:0,code:'Kc8 ttSport+',name:'ttSport Coupé',spec:'4,4 l V8 · 604 PS · 330 km/h',price:'from 114 700 EUR'}
+  ];
+
+  hero = [
+    {img:'coast-lineup.webp',eyebrow:'The 2026 range',title:'Three bodies. One engineering brief.',
+     text:'Saloon, Touring and Coupé share a platform, a drivetrain layout and a tolerance sheet. They do not share a purpose.',cta:'See the range',route:'range'},
+    {img:'motorsport-hero.webp',eyebrow:'K Specials · Trackday',title:'Built for one lap, repeated.',
+     text:'471 PS, all-wheel drive, 310 km/h. The Trackday leaves the works in a single specification and carries no option list.',cta:'Explore ttSport',route:'ttsport'},
+    {img:'heritage-coast.webp',eyebrow:'800 Specials · Heritage',title:'556 PS, and a numbered plaque.',
+     text:'The Heritage carries the biturbo V8 in two output steps, the gold livery as standard and bronze as the option.',cta:'Build a Heritage',route:'config'},
+    {img:'coast-cobbles.webp',eyebrow:'846 ttSport',title:'Forged wheels, and the callipers behind them.',
+     text:'The ttSport wheel is forged in one piece and saves 2,4 kg per corner. Behind it sits a 395 mm disc and a six-piston calliper.',cta:'Explore ttSport',route:'ttsport'},
+    {img:'bridge-convoy.webp',eyebrow:'The 2026 range',title:'Five bodies, one assembly hall.',
+     text:'Saloon, Touring, XC, Coupé and the ttSport cars run down the same line in build order, not in batches.',cta:'See the range',route:'range'}
+  ];
+
+  dealerList = [
+    {id:'muc',name:'ETK Zentrum München',city:'München',address:'Landsberger Straße 402, 81241 München',distance:'4,2 km',tags:['Sales','Service','Works-certified'],x:52,y:66},
+    {id:'ing',name:'ETK Werk Ingolstadt',city:'Ingolstadt',address:'Marie-Curie-Straße 6, 85055 Ingolstadt',distance:'71 km',tags:['Sales','Delivery centre'],x:48,y:44},
+    {id:'aug',name:'ETK Partner Augsburg',city:'Augsburg',address:'Donauwörther Straße 12, 86154 Augsburg',distance:'61 km',tags:['Sales','Service'],x:33,y:58},
+    {id:'nue',name:'ETK Partner Nürnberg',city:'Nürnberg',address:'Fürther Straße 244, 90429 Nürnberg',distance:'164 km',tags:['Service','Works-certified'],x:40,y:22},
+    {id:'stu',name:'ETK Zentrum Stuttgart',city:'Stuttgart',address:'Heilbronner Straße 310, 70469 Stuttgart',distance:'198 km',tags:['Sales','Service'],x:12,y:40}
+  ];
+
+  timeline = [
+    {year:'1953',title:'The first hall',text:'Production begins with a light commercial chassis built under licence. The press shop, the paint line and final assembly are laid out in the order they still occupy.'},
+    {year:'1968',title:'Longitudinal, rear-driven',text:'The first car engineered in-house sets the layout the marque has not left since: engine behind the front axle line, drive to the rear.'},
+    {year:'1989',title:'ttSport is founded',text:'A separate works is established to prepare cars for touring car regulations. The three-stripe livery and the boot-lid lettering date from this year.'},
+    {year:'2003',title:'Aluminium body shop',text:'The mixed-material structure enters series production. Kerb weight on the mid-size saloon falls by 94 kg against the outgoing steel shell.'},
+    {year:'2013',title:'800-Series',text:'The executive saloon and Touring arrive on the aluminium-intensive platform, with all-wheel drive offered from launch.'},
+    {year:'2015',title:'K-Series',text:'A two-seat coupé on a shortened 800 platform. 1 500 to 1 650 kg depending on specification, 50:50 distribution across the range.'},
+    {year:'2026',title:'Where the marque stands',text:'Four plants, 24 800 employees, 32 markets. The floor plan of the first hall is unchanged.'}
+  ];
+
+  driveModes = [
+    {tag:'Standard',name:'Comfort',text:'Softest damper map, earliest upshift, steering assistance at maximum. The default at every start.'},
+    {tag:'Standard',name:'Sport',text:'Throttle mapped one-to-one, shift points raised by 900 rpm, dampers at the middle setting.'},
+    {tag:'Optional',name:'Sport+',text:'Stability control raised to its second threshold. Exhaust flaps open above 3 000 rpm.'},
+    {tag:'ttSport only',name:'ttSport+',text:'Stability control off, launch control armed, dampers at the firmest map. Circuit use only.'},
+    {tag:'Specials only',name:'Drift',text:'Rear axle released, front torque cut, steering angle extended. Offered on the Heritage.'}
+  ];
+
+  compareRows = [
+    {label:'Engine',a:'3,0 l I6 turbo',b:'3,0 l I6 turbo',c:'4,4 l V8 turbo'},
+    {label:'Power',a:'305 / 367 PS',b:'367 PS',c:'604 PS'},
+    {label:'Torque',a:'407 / 464 N·m',b:'464 N·m',c:'708 N·m'},
+    {label:'Drive',a:'AWD',b:'RWD / AWD',c:'RWD / AWD'},
+    {label:'Transmission',a:'8-speed automatic',b:'7-speed ttSport automatic',c:'7-speed ttSport automatic'},
+    {label:'Optional transmission',a:'6-speed manual',b:'6-speed manual',c:'6-speed manual'},
+    {label:'Top speed',a:'250 / 290 km/h',b:'250 km/h',c:'330 km/h'},
+    {label:'Price',a:'from 65 200 EUR',b:'from 71 400 EUR',c:'from 114 700 EUR'}
+  ];
+
+  steps = ['Model','Trim','Transmission','Colour','Options','Summary'];
+
+  componentDidMount(){
+    this.timer = setInterval(() => this.setState(s => ({slide:(s.slide+1)%3})), 7000);
+    this.onResize = () => this.setState({vw:window.innerWidth});
+    window.addEventListener('resize', this.onResize);
+    this.applyAccent();
+  }
+  componentDidUpdate(prev){ if (!prev || prev.accentSignal !== this.props.accentSignal) this.applyAccent(); }
+  componentWillUnmount(){ clearInterval(this.timer); window.removeEventListener('resize', this.onResize); }
+
+  applyAccent(){
+    const s = document.documentElement.style;
+    const v = this.props.accentSignal || 'tricolour';
+    const keys = ['--m-stripe','--m-blue','--etk-orange-600','--etk-orange-700','--etk-orange-900'];
+    keys.forEach(k => s.removeProperty(k));
+    if (v === 'blue'){
+      s.setProperty('--m-stripe','linear-gradient(90deg,#0066b1 0 100%)');
+    } else if (v === 'mono'){
+      s.setProperty('--m-stripe','linear-gradient(90deg,#0b0c0d 0 100%)');
+      s.setProperty('--m-blue','#0b0c0d');
+      s.setProperty('--etk-orange-600','#0b0c0d');
+      s.setProperty('--etk-orange-700','#2a2e33');
+      s.setProperty('--etk-orange-900','#000000');
+    }
+  }
+
+  imgOf(f){ return (f.dir || (f.s === 8 ? this.B : this.K)) + f.img; }
+  fmt(n){ return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' EUR'; }
+
+  go(r){ return (e) => { if (e && e.preventDefault) e.preventDefault(); const to = (r === 'account' && !this.state.user) ? 'login' : r; this.setState({route:to, menu:false, lerr:''}); window.scrollTo(0,0); }; }
+
+  famOf(id){ return this.fams.find(f => f.id === id) || this.fams[0]; }
+
+  setFam(id){
+    return () => this.setState(s => ({cfg:{fam:id, trim:0, gear:'std', ext:0, int:0, opts:{}}}));
+  }
+
+  setCfg(key, v){ return () => this.setState(s => ({cfg:Object.assign({}, s.cfg, {[key]:v})})); }
+
+  cfgUrl(famId, t){
+    const f = this.famOf(famId);
+    const page = ({'K-Series':'ETK K-Series Configurator.html', '900-Series':'ETK 900 Configurator.html',
+      '1300-Series':'ETK 1300 Configurator.html', 'S-Series':'ETK S Configurator.html'})[f.series] || 'ETK 800 Configurator.html';
+    t = t || f.trims[0];
+    const q = ['trim=' + t.code.replace(/ AWD$/, '').toLowerCase().replace(/\s+/g, '').replace('+', 'plus')];
+    if (/ AWD$/.test(t.code)) q.push('drive=awd');
+    if (famId === 'xc') q.push('body=touring');
+    if (famId === 'ssp' && t.code === 'Exclusive') q.push('body=lwb');
+    return page + '?' + q.join('&');
+  }
+
+  buildFam(id, t){
+    return (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      window.location.href = this.cfgUrl(id, t);
+    };
+  }
+
+  total(){
+    const c = this.state.cfg;
+    const f = this.famOf(c.fam);
+    const t = f.trims[c.trim] || f.trims[0];
+    const ext = this.paintBook[f.ext[c.ext] || f.ext[0]];
+    const int = this.intBook[f.int[c.int] || f.int[0]];
+    let sum = t.price + ext.d;
+    if (c.gear === 'opt' && t.opt) sum += t.opt.d;
+    f.options.forEach((o, i) => { if (c.opts[i]) sum += o.d; });
+    return {sum, f, t, ext, int};
+  }
+
+  navStyle(on){
+    const inv = (this.props.headerTreatment || 'light') === 'inverse';
+    return {
+      c: on ? (inv ? '#fff' : 'var(--text-strong)') : (inv ? 'rgba(255,255,255,0.64)' : 'var(--text-muted)'),
+      r: on ? 'inset 0 -2px 0 var(--m-blue)' : 'none',
+      e: on ? 'var(--m-blue)' : 'transparent'
+    };
+  }
+
+  heroLayers(){
+    const cur = this.state.slide;
+    const layers = this.hero.map((h, i) => React.createElement('div', {
+      key:i,
+      style:{position:'absolute', inset:0, opacity:i === cur ? 1 : 0, transition:'opacity 900ms cubic-bezier(0.2,0,0,1)', background:'#0b0c0d'}
+    },
+      React.createElement('img', {src:this.P + h.img, alt:'', style:{width:'100%', height:'100%', objectFit:'cover', display:'block'}}),
+      React.createElement('div', {style:{position:'absolute', inset:0, background:'linear-gradient(90deg, rgba(11,12,13,.9) 0%, rgba(11,12,13,.62) 46%, rgba(11,12,13,.15) 82%)'}})
+    ));
+    return React.createElement('div', {style:{position:'absolute', inset:0}}, layers);
+  }
+
+  renderVals(){
+    const st = this.state, r = st.route;
+    const h = this.hero[st.slide];
+
+    const active = {
+      range: r === 'range',
+      ttsport: r === 'ttsport',
+      specials: r === 'specials',
+      heritage: r === 'heritage',
+      motorsport: r === 'motorsport'
+    };
+    const nav = {};
+    Object.keys(active).forEach(k => { nav[k] = this.navStyle(active[k]); });
+
+    const treat = this.props.headerTreatment || 'light';
+    const mode = this.props.navMode || 'auto';
+    const collapse = mode === 'burger' || (mode === 'auto' && st.vw < 1140);
+
+    const famCard = (f) => ({
+      img:this.imgOf(f), code:f.code, name:f.name,
+      spec:f.engine, price:'from ' + this.fmt(Math.min.apply(null, f.trims.map(t => t.price))),
+      badge:f.kind === 'tt' ? {label:'ttSport', tone:'ttsport'} : (f.kind === 'special' ? {label:'Limited', tone:'accent'} : null),
+      onClick:this.buildFam(f.id)
+    });
+
+    const flt = st.f;
+    const chip = (on, label, go) => ({
+      label, go,
+      bg: on ? 'var(--m-blue)' : 'transparent',
+      fg: on ? '#fff' : 'var(--text-body)',
+      bd: on ? 'var(--m-blue)' : 'var(--etk-graphite-300)'
+    });
+    const multi = (key, v) => () => this.setState(s => {
+      const cur = s.f[key], next = cur.indexOf(v) > -1 ? cur.filter(x => x !== v) : cur.concat([v]);
+      return {f:Object.assign({}, s.f, {[key]:next})};
+    });
+
+    const filterGroups = [
+      {label:'Body', chips:['Saloon','Touring','Coupé','Long wheelbase'].map(v => chip(flt.chassis.indexOf(v) > -1, v, multi('chassis', v)))},
+      {label:'Series', chips:['800-Series','900-Series','1300-Series','K-Series','S-Series'].map(v => chip(flt.series.indexOf(v) > -1, v, multi('series', v)))},
+      {label:'Fuel', chips:['Gasoline','Diesel','Hybrid','Electric'].map(v => chip(flt.fuel.indexOf(v) > -1, v, multi('fuel', v)))}
+    ];
+
+    const ttOn = flt.div.indexOf('tt') > -1, spOn = flt.div.indexOf('special') > -1;
+    const kindOk = (fm) => !flt.div.length || flt.div.indexOf(fm.kind) > -1;
+    const bodyOk = (fm) => !flt.chassis.length || (this.chassisMap[fm.id] || []).some(b => flt.chassis.indexOf(b) > -1);
+    const seriesOk = (fm) => !flt.series.length || flt.series.indexOf(fm.series) > -1;
+    const rowOk = (t) => (!flt.fuel.length || flt.fuel.indexOf(t.fuel) > -1) && t.price >= flt.pmin && t.price <= flt.pmax;
+
+    const matched = this.fams
+      .filter(fm => kindOk(fm) && bodyOk(fm) && seriesOk(fm))
+      .map(fm => ({fm:fm, trims:fm.trims.filter(rowOk)}))
+      .filter(x => x.trims.length);
+    const trimTotal = matched.reduce((n, x) => n + x.trims.length, 0);
+
+    const familyViews = matched.map(m => { const f = m.fm; return ({
+      img:this.imgOf(f), code:f.code, name:f.name, series:f.series, engine:f.engine, blurb:f.blurb,
+      trimCount:String(m.trims.length),
+      build:this.buildFam(f.id),
+      rows:m.trims.map(t => ({
+        code:t.code, ps:t.ps, nm:t.nm, vmax:t.vmax, fuel:t.fuel, drive:t.drive,
+        gear:t.opt ? t.std + ' · ' + t.opt.name + ' optional' : t.std,
+        price:this.fmt(t.price), url:this.cfgUrl(f.id, t)
+      })),
+      ext:f.ext.map(k => ({name:this.paintBook[k].name, hex:this.paintBook[k].hex})),
+      int:f.int.map(k => ({name:this.intBook[k].name, hex:this.intBook[k].hex})),
+      optTags:f.options.map(o => o.name),
+      notes:f.notes
+    }); });
+
+    const tot = this.total();
+    const sp = this.specials[st.sp] || this.specials[0];
+    const spT = this.famOf(sp.fam).trims[sp.ti];
+    const cfg = st.cfg, f = tot.f, step = st.step;
+    const monthly = Math.round((tot.sum * 0.8 * 1.078) / 48);
+
+    const gearRows = [{name:tot.t.std, detail:'Standard on the ' + tot.t.code, price:'Included', sel:cfg.gear === 'std', go:this.setCfg('gear','std')}];
+    if (tot.t.opt) gearRows.push({
+      name:tot.t.opt.name, detail:'Optional on the ' + tot.t.code,
+      price:tot.t.opt.d ? '+ ' + this.fmt(tot.t.opt.d) : 'No cost option',
+      sel:cfg.gear === 'opt', go:this.setCfg('gear','opt')
+    });
+
+    const summaryRows = [
+      {label:'Family', value:f.code + ' · ' + f.name},
+      {label:'Trim', value:tot.t.code + ' — ' + this.fmt(tot.t.price)},
+      {label:'Power', value:tot.t.ps + ' PS · ' + tot.t.nm + ' N·m'},
+      {label:'Drive', value:tot.t.drive},
+      {label:'Transmission', value:cfg.gear === 'opt' && tot.t.opt ? tot.t.opt.name : tot.t.std},
+      {label:'Top speed', value:tot.t.vmax},
+      {label:'Exterior', value:tot.ext.name + ' ' + tot.ext.finish + (tot.ext.d ? ' — ' + this.fmt(tot.ext.d) : '')},
+      {label:'Interior', value:tot.int.name},
+      {label:'Options', value:(f.options.filter((o, i) => cfg.opts[i]).map(o => o.name).join(', ') || 'None')},
+      {label:'Total', value:this.fmt(tot.sum)}
+    ];
+
+    return {
+      n24:24, n30:30,
+      mt20:{marginTop:20}, mt32:{marginTop:32}, inputStyle:{width:260}, selStyle:{width:200},
+
+      isHome:r === 'home', isRange:r === 'range', isTt:r === 'ttsport', isHeritage:r === 'heritage',
+      isDealers:r === 'dealers', isOwners:r === 'owners', isConfig:r === 'config',
+      isMotorsport:r === 'motorsport', isSpecials:r === 'specials',
+      isLogin:r === 'login', isAccount:r === 'account' && !!st.user, isJobs:r === 'jobs', isShop:r === 'shop',
+      goShop:this.go('shop'), iconLg:32,
+      ...(() => {
+        const cats = ['All'].concat(this.products.map(p => p.cat).filter((v, i, a) => a.indexOf(v) === i));
+        const items = Object.keys(st.cart).map(id => ({p:this.products.find(x => x.id === id), q:st.cart[id]})).filter(x => x.p);
+        const count = items.reduce((n, x) => n + x.q, 0), sub = items.reduce((n, x) => n + x.q * x.p.price, 0), ship = sub >= 150 || !sub ? 0 : 6.9;
+        const eur = (v) => v.toLocaleString('de-DE', {minimumFractionDigits:2, maximumFractionDigits:2}) + ' EUR';
+        return {
+          shopCats:cats.map(c => chip(st.shopCat === c, c, () => this.setState({shopCat:c}))),
+          shopList:this.products.filter(p => st.shopCat === 'All' || p.cat === st.shopCat).map(p => { const inCart = st.cart[p.id] || 0; return {
+            name:p.name, cat:p.cat, note:p.note, price:eur(p.price), img:p.img || '', hasImg:!!p.img, noImg:!p.img, icon:p.icon || 'package',
+            btn:inCart ? 'Add (' + inCart + ')' : 'Add', variant:inCart ? 'secondary' : 'primary', add:() => this.setQty(p.id, 1)
+          }; }),
+          cartCount:count, hasCart:count > 0, emptyCart:count === 0 && !st.order,
+          cartList:items.map(x => ({name:x.p.name, qty:x.q, unit:eur(x.p.price), total:eur(x.q * x.p.price), inc:() => this.setQty(x.p.id, 1), dec:() => this.setQty(x.p.id, -1)})),
+          cartSub:eur(sub), cartShip:ship ? eur(ship) : 'Free', cartTotal:eur(sub + ship),
+          checkout:() => this.placeOrder(), checkoutLabel:st.user ? 'Place order' : 'Log in to order',
+          hasOrder:!!st.order, orderNo:st.order ? st.order.no : '', orderEmail:st.order ? st.order.email : ''
+        };
+      })(),
+
+      loggedIn:!!st.user, loggedOut:!st.user,
+      initials:st.user ? st.user.name.split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase() : '',
+      accountLabel:st.user ? 'My ETK' : 'Log in',
+      noop:(e) => { if (e && e.preventDefault) e.preventDefault(); },
+
+      isCreate:st.lmode === 'create',
+      loginTitle:st.lmode === 'create' ? 'Create an account.' : 'Log in.',
+      loginText:st.pending ? 'Log in to send your application. It is stored with your account.' : (st.lmode === 'create' ? 'One account for your vehicle, your builds and your applications.' : 'Your vehicle, your saved builds and your applications, in one place.'),
+      loginBtn:st.lmode === 'create' ? 'Create account' : 'Log in',
+      tabInC:st.lmode === 'signin' ? 'var(--text-strong)' : 'var(--text-muted)', tabInR:st.lmode === 'signin' ? 'inset 0 -2px 0 var(--m-blue)' : 'none',
+      tabNewC:st.lmode === 'create' ? 'var(--text-strong)' : 'var(--text-muted)', tabNewR:st.lmode === 'create' ? 'inset 0 -2px 0 var(--m-blue)' : 'none',
+      setSignin:() => this.setState({lmode:'signin', lerr:''}), setCreate:() => this.setState({lmode:'create', lerr:''}),
+      lfName:st.lf.name, lfEmail:st.lf.email, lfPw:st.lf.pw,
+      onLfName:(e) => { const v = e.target.value; this.setState(s => ({lf:Object.assign({}, s.lf, {name:v})})); },
+      onLfEmail:(e) => { const v = e.target.value; this.setState(s => ({lf:Object.assign({}, s.lf, {email:v})})); },
+      onLfPw:(e) => { const v = e.target.value; this.setState(s => ({lf:Object.assign({}, s.lf, {pw:v})})); },
+      loginErr:st.lerr, hasLoginErr:!!st.lerr,
+      submitLogin:(e) => this.submitLogin(e),
+
+      userName:st.user ? st.user.name : '', userEmail:st.user ? st.user.email : '', custNo:st.user ? st.user.cust : '',
+      signOut:() => { this.saveUser(null); this.setState({user:null, route:'home'}); window.scrollTo(0, 0); },
+      savedBuilds:[['846', 1], ['k', 0], ['1300', 0]].map(p => { const fm = this.famOf(p[0]), t = fm.trims[p[1]] || fm.trims[0]; return {
+        img:this.imgOf(fm), code:fm.code + ' ' + t.code, spec:t.ps + ' PS · ' + t.drive + ' · ' + fm.name, price:this.fmt(t.price), open:this.buildFam(fm.id, t)
+      }; }),
+      apps:(st.user ? st.user.apps : []).map(a => { const j = this.jobs.find(x => x.id === a.id) || {title:'Role ' + a.id, area:'', loc:''}; return {
+        title:j.title, meta:'Ref. ' + a.id + ' · ' + j.loc + ' · sent ' + a.date
+      }; }),
+      hasApps:!!(st.user && st.user.apps.length), noApps:!(st.user && st.user.apps.length),
+      profileRows:st.user ? [
+        {label:'Name', value:st.user.name},
+        {label:'Email', value:st.user.email},
+        {label:'Customer no.', value:st.user.cust},
+        {label:'Preferred partner', value:this.dealerList[0].name},
+        {label:'Language', value:'English'}
+      ] : [],
+
+      goLogin:this.go('login'), goAccount:this.go('account'), goJobs:this.go('jobs'),
+      applyLabel:st.user ? 'Apply for this role' : 'Log in to apply',
+      jobQ:st.jobQ, onJobQ:(e) => this.setState({jobQ:e.target.value}),
+      jobLoc:st.jobLoc, onJobLoc:(e) => this.setState({jobLoc:e.target.value}),
+      jobLocOptions:['All locations'].concat(this.jobs.map(j => j.loc).filter((v, i, a) => a.indexOf(v) === i)),
+      jobAreas:this.jobs.map(j => j.area).filter((v, i, a) => a.indexOf(v) === i).map(v => chip(st.jobArea.indexOf(v) > -1, v, () => this.setState(s => ({jobArea:s.jobArea.indexOf(v) > -1 ? s.jobArea.filter(x => x !== v) : s.jobArea.concat([v])})))),
+      resetJobs:() => this.setState({jobQ:'', jobArea:[], jobLoc:'All locations'}),
+      ...(() => {
+        const q = st.jobQ.trim().toLowerCase();
+        const list = this.jobs.filter(j => (!st.jobArea.length || st.jobArea.indexOf(j.area) > -1) && (st.jobLoc === 'All locations' || j.loc === st.jobLoc) && (!q || (j.title + ' ' + j.area + ' ' + j.loc + ' ' + j.text).toLowerCase().indexOf(q) > -1));
+        const apps = st.user ? st.user.apps : [];
+        return {
+          jobCountLabel:list.length + (list.length === 1 ? ' open role.' : ' open roles.'),
+          noJobs:list.length === 0,
+          jobList:list.map(j => { const open = st.jobOpen === j.id, app = apps.find(a => a.id === j.id); return {
+            title:j.title, meta:j.area + ' · ' + j.loc + ' · ' + j.type, ref:'Ref. ' + j.id, text:j.text, reqs:j.reqs,
+            rows:[{label:'Location', value:j.loc}, {label:'Contract', value:j.type}, {label:'Start', value:j.start}, {label:'Reference', value:j.id}],
+            open:open, icon:open ? 'chevron-up' : 'chevron-down',
+            bg:open ? 'var(--surface-sunken)' : 'transparent', edge:open ? 'var(--m-blue)' : 'transparent',
+            toggle:() => this.setState(s => ({jobOpen:s.jobOpen === j.id ? null : j.id})),
+            applied:!!app, notApplied:!app, date:app ? app.date : '', apply:() => this.applyJob(j.id)
+          }; })
+        };
+      })(),
+
+      spImg:sp.img, spName:sp.name, spCode:sp.code, spSeries:sp.series, spText:sp.text,
+      spPs:spT.ps, spNm:spT.nm, spVmax:String(spT.vmax).replace(' km/h',''),
+      spCounter:(st.sp + 1) + ' / ' + this.specials.length,
+      spRows:[
+        {label:'Drive', value:spT.drive},
+        {label:'Transmission', value:spT.opt ? spT.std + ' · ' + spT.opt.name + ' optional' : spT.std},
+        {label:'Fuel', value:spT.fuel},
+        {label:'From', value:this.fmt(spT.price)}
+      ],
+      spPrev:() => this.setState(s => ({sp:(s.sp + this.specials.length - 1) % this.specials.length})),
+      spNext:() => this.setState(s => ({sp:(s.sp + 1) % this.specials.length})),
+      spBuild:this.buildFam(sp.fam, spT), spBuildOld:(e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({route:'config', step:1, menu:false, cfg:{fam:sp.fam, trim:sp.ti, gear:'std', ext:0, int:0, opts:{}}}); window.scrollTo(0,0); },
+      spTabs:this.specials.map((x, i) => ({
+        label:x.name, go:() => this.setState({sp:i}),
+        bg: i === st.sp ? 'var(--m-blue)' : 'transparent',
+        fg: i === st.sp ? '#fff' : 'var(--text-body)',
+        bd: i === st.sp ? 'var(--m-blue)' : 'var(--etk-graphite-300)'
+      })),
+
+      goHome:this.go('home'), goRange:this.go('range'), goTt:this.go('ttsport'),
+      goHeritage:this.go('heritage'), goOwners:this.go('owners'),
+      goDealers:(e) => { if (e && e.preventDefault) e.preventDefault(); window.location.href = 'ETK Partners.html'; },
+      goConfig:this.go('config'), goMotorsport:this.go('motorsport'),
+      goSpecials:this.go('specials'),
+
+      navInline:!collapse, navBurger:collapse, menuOpen:collapse && st.menu,
+      toggleMenu:(e) => { if (e && e.preventDefault) e.preventDefault(); this.setState(s => ({menu:!s.menu})); },
+      closeMenu:(e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({menu:false}); },
+      hdrBg: treat === 'inverse' ? 'rgba(11,12,13,0.92)' : (treat === 'solid' ? '#ffffff' : 'rgba(255,255,255,0.9)'),
+      hdrBorder: treat === 'inverse' ? 'var(--etk-graphite-700)' : (treat === 'solid' ? 'var(--etk-graphite-300)' : 'var(--border-hairline)'),
+      logoVariant: treat === 'inverse' ? 'white' : 'black',
+      burgerInk: treat === 'inverse' ? '#ffffff' : 'var(--etk-black)',
+
+      cRange:nav.range.c, rRange:nav.range.r, eRange:nav.range.e,
+      cTt:nav.ttsport.c, rTt:nav.ttsport.r, eTt:nav.ttsport.e,
+      cSpecials:nav.specials.c, rSpecials:nav.specials.r, eSpecials:nav.specials.e,
+      cHeritage:nav.heritage.c, rHeritage:nav.heritage.r, eHeritage:nav.heritage.e,
+      cMotorsport:nav.motorsport.c, rMotorsport:nav.motorsport.r, eMotorsport:nav.motorsport.e,
+
+      heroLayers:this.heroLayers(),
+      heroEyebrow:h.eyebrow, heroTitle:h.title, heroText:h.text, heroCta:h.cta,
+      heroGo:this.go(h.route),
+      heroDots:this.hero.map((x, i) => ({go:() => this.setState({slide:i}), bg: i === st.slide ? 'var(--m-blue)' : 'rgba(255,255,255,0.35)'})),
+
+      featured:[this.famOf('846'), this.famOf('900'), this.famOf('1300'), this.famOf('s'), this.famOf('k'), this.famOf('ktt')].map(famCard),
+      filterGroups, familyViews, compareRows:this.compareRows,
+      toggleTt:multi('div','tt'), toggleSp:multi('div','special'),
+      ttBg: ttOn ? 'var(--surface-sunken)' : 'transparent',
+      ttBd: ttOn ? 'var(--m-blue)' : 'var(--etk-graphite-300)',
+      ttRing: ttOn ? 'inset 0 0 0 1px var(--m-blue)' : 'none',
+      ttCheck: ttOn ? 'var(--m-blue)' : 'transparent',
+      spBg: spOn ? 'var(--surface-sunken)' : 'transparent',
+      spBd: spOn ? 'var(--m-blue)' : 'var(--etk-graphite-300)',
+      spRing: spOn ? 'inset 0 0 0 1px var(--m-blue)' : 'none',
+      spCheck: spOn ? 'var(--m-blue)' : 'transparent',
+      priceFloor:this.priceFloor, priceCeil:this.priceCeil, pmin:flt.pmin, pmax:flt.pmax,
+      priceLabel:this.fmt(flt.pmin) + ' — ' + this.fmt(flt.pmax),
+      onPmin:(e) => { const v = Math.min(Number(e.target.value), flt.pmax - 1000); this.setState(s => ({f:Object.assign({}, s.f, {pmin:v})})); },
+      onPmax:(e) => { const v = Math.max(Number(e.target.value), flt.pmin + 1000); this.setState(s => ({f:Object.assign({}, s.f, {pmax:v})})); },
+      resultLabel:trimTotal + (trimTotal === 1 ? ' trim' : ' trims') + ' across ' + matched.length + (matched.length === 1 ? ' family' : ' families'),
+      noResults:matched.length === 0,
+      resetFilters:() => this.setState({f:{chassis:[], series:[], fuel:[], div:[], pmin:this.priceFloor, pmax:this.priceCeil}}), timeline:this.timeline, driveModes:this.driveModes,
+
+      ttModels:this.ttCards.map(c => ({
+        img:(c.s === 8 ? this.B : this.K) + c.img, code:c.code, name:c.name, spec:c.spec, price:c.price,
+        badge:{label:'ttSport', tone:'ttsport'}, onClick:this.buildFam(c.s === 8 ? '800tt' : 'ktt')
+      })),
+
+      termOptions:['36 months','48 months','60 months'], term:st.term,
+      onTerm:(e) => this.setState({term:e.target.value}),
+
+      q:st.q, onQ:(e) => this.setState({q:e.target.value}),
+      serviceOptions:['Sales and service','Sales only','Service only','Works-certified'],
+      dealers:this.dealerList.map(d => ({
+        name:d.name, city:d.city, address:d.address, distance:d.distance, tags:d.tags, x:d.x, y:d.y,
+        go:() => this.setState({dealer:d.id}),
+        bg: st.dealer === d.id ? 'var(--surface-sunken)' : 'transparent',
+        edge: st.dealer === d.id ? 'var(--m-blue)' : 'transparent',
+        pinBg: st.dealer === d.id ? 'var(--m-blue)' : 'var(--etk-graphite-700)',
+        pinFg:'#fff'
+      })),
+
+      vehicleRows:[
+        {label:'Mileage', value:'48 210 km'},
+        {label:'Next inspection', value:'in 1 200 km'},
+        {label:'Warranty', value:'until 14.03.2027'},
+        {label:'iTronic', value:'8.4.1 · up to date'}
+      ],
+      testDriveRows:[
+        {label:'Duration', value:'45 minutes'},
+        {label:'Extended loan', value:'24 hours, on request'},
+        {label:'Licence held', value:'2 years minimum'},
+        {label:'Minimum age', value:'23'}
+      ],
+      partnerOptions:this.dealerList.map(d => d.name),
+      workOptions:['Inspection','Oil service','Brake service','Tyre change','Diagnostics'],
+      modelOptions:this.fams.reduce((acc, fm) => acc.concat(fm.trims.map(t => fm.code + ' ' + t.code)), []),
+      consent:st.consent, onConsent:(v) => this.setState({consent:v}),
+
+      steps:this.steps, stepId:this.steps[step],
+      setStep:(v) => this.setState({step:this.steps.indexOf(v)}),
+      prevStep:() => this.setState(s => ({step:Math.max(0, s.step - 1)})),
+      nextStep:() => this.setState(s => ({step:Math.min(5, s.step + 1)})),
+      atModel:step === 0, atTrim:step === 1, atGear:step === 2, atColour:step === 3,
+      atOptions:step === 4, atSummary:step === 5,
+      cfgHeading:step === 0 ? 'Start with a family.' : this.steps[step] + '.',
+
+      cfgFamilies:this.fams.map(fm => ({
+        img:this.imgOf(fm), code:fm.code, name:fm.name, spec:fm.engine,
+        price:'from ' + this.fmt(Math.min.apply(null, fm.trims.map(t => t.price))),
+        sel:cfg.fam === fm.id, go:this.setFam(fm.id)
+      })),
+      trimRows:f.trims.map((t, i) => ({
+        name:t.code,
+        detail:t.ps + ' PS · ' + t.nm + ' N·m · ' + t.vmax + ' · ' + t.drive,
+        price:this.fmt(t.price), sel:cfg.trim === i, go:this.setCfg('trim', i)
+      })),
+      trimNote:f.notes[0],
+      gearRows,
+      extSwatches:f.ext.map((k, i) => ({
+        name:this.paintBook[k].name, color:this.paintBook[k].hex, finish:this.paintBook[k].finish,
+        sel:cfg.ext === i, go:this.setCfg('ext', i)
+      })),
+      intSwatches:f.int.map((k, i) => ({
+        name:this.intBook[k].name, color:this.intBook[k].hex, finish:'leather',
+        sel:cfg.int === i, go:this.setCfg('int', i)
+      })),
+      paintName:tot.ext.name + ' · ' + tot.ext.finish,
+      paintPrice:tot.ext.d ? '+ ' + this.fmt(tot.ext.d) : 'Standard colour',
+      intName:tot.int.name + ' interior',
+      optionList:f.options.map((o, i) => ({
+        name:o.name, detail:o.detail, price:o.d ? '+ ' + this.fmt(o.d) : 'No cost option', on:!!cfg.opts[i],
+        go:(v) => this.setState(s => ({cfg:Object.assign({}, s.cfg, {opts:Object.assign({}, s.cfg.opts, {[i]:v})})}))
+      })),
+      cfgImg:this.imgOf(f), cfgCode:f.code + ' ' + tot.t.code, cfgName:f.name,
+      cfgSpec:f.engine + ' · ' + tot.t.ps + ' PS',
+      cfgTotal:this.fmt(tot.sum), cfgMonthly:'or ' + this.fmt(monthly) + ' per month over 48 months',
+      sidebarRows:[
+        {label:'Trim', value:tot.t.code},
+        {label:'Power', value:tot.t.ps + ' PS'},
+        {label:'Transmission', value:cfg.gear === 'opt' && tot.t.opt ? tot.t.opt.name : tot.t.std},
+        {label:'Exterior', value:tot.ext.name},
+        {label:'Interior', value:tot.int.name}
+      ],
+      summaryRows,
+
+      cookieOpen:st.cookie,
+      acceptCookies:() => this.setState({cookie:false}),
+      openCookies:(e) => { if (e && e.preventDefault) e.preventDefault(); this.setState({cookie:true}); }
+    };
+  }
+}
+</script>
+</body>
+</html>

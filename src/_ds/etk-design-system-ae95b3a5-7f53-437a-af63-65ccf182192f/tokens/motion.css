@@ -1,0 +1,12 @@
+:root{
+/* Mechanical, damped. Nothing bounces; nothing overshoots. */
+--ease-standard:cubic-bezier(0.2,0,0,1); /* @kind other */
+--ease-out:cubic-bezier(0.16,1,0.3,1); /* @kind other */
+--ease-in:cubic-bezier(0.7,0,0.84,0); /* @kind other */
+--dur-instant:80ms; /* @kind other */
+--dur-fast:140ms; /* @kind other */
+--dur-base:220ms; /* @kind other */
+--dur-slow:420ms; /* @kind other */
+--dur-cinematic:900ms; /* @kind other */
+--transition-control:background-color var(--dur-fast) var(--ease-standard),color var(--dur-fast) var(--ease-standard),border-color var(--dur-fast) var(--ease-standard); /* @kind other */
+}

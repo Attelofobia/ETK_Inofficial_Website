@@ -1,0 +1,35 @@
+:root{
+--font-core:"Overpass","Helvetica Neue",Arial,sans-serif;
+--font-display:var(--font-core);
+--font-numeric:var(--font-core);
+
+--fw-light:300; /* @kind font */
+--fw-regular:400; /* @kind font */
+--fw-medium:500; /* @kind font */
+--fw-semibold:600; /* @kind font */
+--fw-bold:700; /* @kind font */
+--fw-black:900; /* @kind font */
+
+/* Display — headlines and model names. Tight, heavy, slightly negative tracking. */
+--type-display-1-size:72px;--type-display-1-lh:0.98;--type-display-1-ls:-0.025em;--type-display-1-weight:800;
+--type-display-2-size:52px;--type-display-2-lh:1.02;--type-display-2-ls:-0.022em;--type-display-2-weight:800;
+--type-display-3-size:36px;--type-display-3-lh:1.08;--type-display-3-ls:-0.018em;--type-display-3-weight:700;
+
+/* Headings */
+--type-h1-size:28px;--type-h1-lh:1.14;--type-h1-ls:-0.012em;--type-h1-weight:700;
+--type-h2-size:21px;--type-h2-lh:1.2;--type-h2-ls:-0.008em;--type-h2-weight:600;
+--type-h3-size:17px;--type-h3-lh:1.25;--type-h3-ls:-0.004em;--type-h3-weight:600;
+
+/* Body */
+--type-body-lg-size:19px;--type-body-lg-lh:1.55;
+--type-body-size:16px;--type-body-lh:1.6;
+--type-body-sm-size:14px;--type-body-sm-lh:1.55;
+--type-caption-size:12px;--type-caption-lh:1.45;
+
+/* Eyebrow / technical label — uppercase, wide tracking. The brand's signature voice. */
+--type-eyebrow-size:11px;--type-eyebrow-lh:1.2;--type-eyebrow-ls:0.18em;--type-eyebrow-weight:700;
+--type-label-size:12px;--type-label-lh:1.2;--type-label-ls:0.1em;--type-label-weight:600;
+
+/* Spec figures — tabular, light, big */
+--type-spec-size:34px;--type-spec-lh:1;--type-spec-ls:-0.02em;--type-spec-weight:300;
+}

@@ -1,3 +1,0 @@
-K/8/9/13/S... K series, 800 series, 900 series, 1300 series, S series
-5/4/c/l/s... Wagon, Sedan, 2-door Coupé, Long wheel base (S series only), short wheel base(S series) or 4-door Coupé (800 series exclusive)
-12/8/6/4/0... No. engine cylinders (0 = electric)

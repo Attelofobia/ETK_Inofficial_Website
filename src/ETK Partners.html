@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ETK — find a partner</title>
+<link rel="stylesheet" href="_ds/etk-design-system-ae95b3a5-7f53-437a-af63-65ccf182192f/styles.css">
+<script src="https://unpkg.com/d3@7.9.0/dist/d3.min.js" integrity="sha384-CjloA8y00+1SDAUkjs099PVfnY2KmDC2BZnws9kh8D/lX1s46w6EPhpXdqMfjK6i" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/topojson-client@3.1.0/dist/topojson-client.min.js" integrity="sha384-Ukv1p/xTma6P4/2bY5KzWBw+ydSpXmhCMtyciIQVDJ1RmOxtCYNMF1uXT9T63H67" crossorigin="anonymous"></script>
+<style>
+:root{
+  --m-blue:#0066b1; --m-violet:#6e2c8f; --m-red:#e10e23;
+  --m-stripe:linear-gradient(90deg,#0066b1 0 33.34%,#6e2c8f 0 66.67%,#e10e23 66.67%);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:#fff;}
+body{font-family:var(--font-core);color:var(--text-body);}
+a{color:var(--m-blue);text-decoration:none;}
+a:hover{color:#00528e;}
+.eyebrow{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);}
+
+header{height:72px;display:flex;align-items:center;gap:20px;padding:0 32px;border-bottom:1px solid var(--border-hairline);position:relative;}
+header img{height:28px;display:block;}
+header .t{font-size:15px;font-weight:700;color:var(--text-strong);}
+header .stripe{position:absolute;left:0;right:0;bottom:0;height:3px;background:var(--m-stripe);}
+header .back{margin-left:auto;min-height:36px;display:inline-flex;align-items:center;padding:0 14px;border:1px solid var(--etk-graphite-300);
+  font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;color:var(--text-strong);}
+header .back:hover{border-color:var(--etk-graphite-700);}
+
+main{max-width:1440px;margin:0 auto;padding:40px 32px 64px;}
+h1{margin:18px 0 0;font-size:44px;line-height:1.02;letter-spacing:-0.025em;font-weight:800;color:var(--text-strong);}
+.lede{margin:14px 0 0;font-size:17px;line-height:1.6;max-width:56ch;}
+.rule{width:48px;height:4px;background:var(--m-stripe);}
+
+.tools{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;margin-top:32px;}
+.field{display:flex;flex-direction:column;gap:6px;}
+.field label{font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;color:var(--text-muted);}
+.field input{height:40px;min-width:260px;padding:0 12px;border:1px solid var(--etk-graphite-300);background:#fff;
+  font-family:var(--font-core);font-size:15px;color:var(--text-strong);border-radius:2px;}
+.field input:focus{outline:2px solid var(--m-blue);outline-offset:2px;border-color:var(--m-blue);}
+.chips{display:flex;gap:8px;flex-wrap:wrap;}
+.chip{min-height:40px;padding:0 16px;border:1px solid var(--etk-graphite-300);background:#fff;cursor:pointer;
+  font-family:var(--font-core);font-size:13px;font-weight:600;color:var(--text-body);border-radius:999px;transition:var(--transition-control);}
+.chip:hover{border-color:var(--etk-graphite-700);}
+.chip[aria-pressed="true"]{background:var(--m-blue);border-color:var(--m-blue);color:#fff;}
+.count{margin-left:auto;font-size:13px;color:var(--text-muted);}
+
+.grid{display:grid;grid-template-columns:minmax(320px,400px) 1fr;gap:24px;margin-top:24px;align-items:start;}
+.list{border:1px solid var(--border-hairline);max-height:640px;overflow-y:auto;}
+.card{width:100%;text-align:left;background:#fff;border:none;border-bottom:1px solid var(--border-hairline);
+  border-left:2px solid transparent;padding:18px 20px;cursor:pointer;font-family:var(--font-core);transition:var(--transition-control);
+  display:flex;flex-direction:column;align-items:stretch;gap:6px;}
+.card:last-child{border-bottom:none;}
+.card:hover{background:var(--surface-sunken);}
+.card[aria-selected="true"]{border-left-color:var(--m-blue);background:var(--surface-sunken);}
+.card .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;width:100%;}
+.card .nm{font-size:17px;line-height:1.3;font-weight:700;letter-spacing:-0.004em;color:var(--text-strong);}
+.card .di{font-size:13px;color:var(--text-muted);font-variant-numeric:tabular-nums;white-space:nowrap;}
+.card .ad{font-size:14px;line-height:1.5;color:var(--text-muted);display:block;}
+.card .tg{margin-top:4px;display:flex;gap:6px;flex-wrap:wrap;}
+.tag{font-size:10px;line-height:1.4;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;padding:3px 7px;white-space:nowrap;
+  border:1px solid var(--etk-graphite-300);color:var(--text-muted);}
+.tag.works{border-color:var(--m-blue);color:var(--m-blue);}
+.empty{padding:40px 20px;text-align:center;font-size:14px;color:var(--text-muted);}
+
+.mapwrap{position:relative;border:1px solid var(--border-hairline);background:#fff;}
+#map{display:block;width:100%;height:640px;}
+.mapwrap .zoom{position:absolute;right:14px;top:14px;display:flex;flex-direction:column;gap:6px;}
+.zoom button{width:34px;height:34px;border:1px solid var(--etk-graphite-300);background:rgba(255,255,255,0.92);cursor:pointer;
+  font-family:var(--font-core);font-size:16px;line-height:1;font-weight:700;color:var(--text-strong);}
+.zoom button:hover{border-color:var(--etk-graphite-700);}
+.mapwrap .legend{position:absolute;left:16px;bottom:14px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+.legend .k{display:flex;align-items:center;gap:7px;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:700;color:var(--text-muted);}
+.legend .k i{width:9px;height:9px;display:block;background:var(--etk-graphite-700);}
+.legend .k.w i{background:var(--m-blue);}
+.mapwrap .src{position:absolute;right:16px;bottom:14px;font-size:10px;color:var(--text-muted);}
+.pop{position:absolute;z-index:4;background:#fff;border:1px solid var(--etk-graphite-500);box-shadow:0 2px 8px rgba(11,12,13,.12);
+  padding:14px 16px;min-width:220px;pointer-events:none;transform:translate(-50%,-100%);}
+.pop .nm{font-size:15px;font-weight:700;color:var(--text-strong);}
+.pop .ad{margin-top:4px;font-size:13px;line-height:1.5;color:var(--text-muted);}
+.pop .ph{margin-top:8px;font-size:13px;color:var(--text-strong);font-variant-numeric:tabular-nums;}
+.pop .bar{height:3px;background:var(--m-stripe);margin:-14px -16px 12px;}
+
+@media (max-width:920px){
+  main{padding:28px 20px 48px;}
+  h1{font-size:34px;}
+  .grid{grid-template-columns:1fr;}
+  #map{height:460px;}
+  .mapwrap{order:-1;}
+  .list{max-height:none;}
+}
+</style>
+</head>
+<body>
+<header>
+  <a href="ETK.dc.html"><img src="assets/logo/etk-roundel-black-alpha.png" alt="ETK"></a>
+  <div class="t">Find a partner</div>
+  <a class="back" href="ETK.dc.html">Back to etk.de</a>
+  <div class="stripe"></div>
+</header>
+
+<main>
+  <div class="rule"></div>
+  <div class="eyebrow" style="margin-top:14px;">Partner network</div>
+  <h1>Sales and service, 412 locations.</h1>
+  <p class="lede">Fourteen of them are ETK-owned centres. Partners marked works-certified carry ttSport tooling and diagnostic access; delivery centres hand over cars built to order at the plant.</p>
+
+  <div class="tools">
+    <div class="field">
+      <label for="q">Postcode, city or partner</label>
+      <input id="q" type="search" placeholder="81241 München" autocomplete="off">
+    </div>
+    <div class="chips" id="chips">
+      <button class="chip" data-tag="Sales" aria-pressed="false">Sales</button>
+      <button class="chip" data-tag="Service" aria-pressed="false">Service</button>
+      <button class="chip" data-tag="Works-certified" aria-pressed="false">Works-certified</button>
+      <button class="chip" data-tag="Delivery centre" aria-pressed="false">Delivery centre</button>
+    </div>
+    <div class="count" id="count"></div>
+  </div>
+
+  <div class="grid">
+    <div class="list" id="list"></div>
+    <div class="mapwrap" id="mapwrap">
+      <svg id="map" role="img" aria-label="Map of ETK partners in Germany"></svg>
+      <div class="zoom">
+        <button id="zin" aria-label="Zoom in">+</button>
+        <button id="zout" aria-label="Zoom out">−</button>
+        <button id="zreset" aria-label="Reset view" style="font-size:10px;letter-spacing:0.08em;">DE</button>
+      </div>
+      <div class="legend">
+        <span class="k"><i></i>Partner</span>
+        <span class="k w"><i></i>Works-certified</span>
+      </div>
+      <div class="src">Geometry: Natural Earth</div>
+    </div>
+  </div>
+</main>
+
+<script>
+const REF = { lat: 48.1414, lon: 11.4930 }; // 81241 München
+
+const PARTNERS = [
+  { id:'muc', name:'ETK Zentrum München',    city:'München',    pc:'81241', addr:'Landsberger Straße 402',    lat:48.1414, lon:11.4930, tel:'089 3000 1200', tags:['Sales','Service','Works-certified'] },
+  { id:'ing', name:'ETK Werk Ingolstadt',    city:'Ingolstadt', pc:'85055', addr:'Marie-Curie-Straße 6',      lat:48.7665, lon:11.4258, tel:'0841 8800 400', tags:['Sales','Delivery centre'] },
+  { id:'aug', name:'ETK Partner Augsburg',   city:'Augsburg',   pc:'86154', addr:'Donauwörther Straße 12',    lat:48.3705, lon:10.8978, tel:'0821 4400 210', tags:['Sales','Service'] },
+  { id:'reg', name:'ETK Partner Regensburg', city:'Regensburg', pc:'93059', addr:'Prüfeninger Straße 88',     lat:49.0134, lon:12.1016, tel:'0941 6200 130', tags:['Service'] },
+  { id:'nue', name:'ETK Partner Nürnberg',   city:'Nürnberg',   pc:'90429', addr:'Fürther Straße 244',        lat:49.4521, lon:11.0767, tel:'0911 2700 800', tags:['Service','Works-certified'] },
+  { id:'stu', name:'ETK Zentrum Stuttgart',  city:'Stuttgart',  pc:'70469', addr:'Heilbronner Straße 310',    lat:48.7758, lon:9.1829,  tel:'0711 5100 600', tags:['Sales','Service'] },
+  { id:'fra', name:'ETK Zentrum Frankfurt',  city:'Frankfurt',  pc:'60528', addr:'Hanauer Landstraße 214',    lat:50.1109, lon:8.6821,  tel:'069 6600 350',  tags:['Sales','Service','Works-certified'] },
+  { id:'kol', name:'ETK Partner Köln',       city:'Köln',       pc:'50829', addr:'Butzweilerhofallee 4',      lat:50.9375, lon:6.9603,  tel:'0221 5900 470', tags:['Sales','Service'] },
+  { id:'dus', name:'ETK Zentrum Düsseldorf', city:'Düsseldorf', pc:'40549', addr:'Willstätterstraße 18',      lat:51.2277, lon:6.7735,  tel:'0211 4300 920', tags:['Sales','Works-certified'] },
+  { id:'han', name:'ETK Partner Hannover',   city:'Hannover',   pc:'30453', addr:'Davenstedter Straße 60',    lat:52.3759, lon:9.7320,  tel:'0511 7700 260', tags:['Sales','Service'] },
+  { id:'ham', name:'ETK Zentrum Hamburg',    city:'Hamburg',    pc:'22525', addr:'Kieler Straße 306',         lat:53.5511, lon:9.9937,  tel:'040 8800 510',  tags:['Sales','Service','Delivery centre'] },
+  { id:'ber', name:'ETK Zentrum Berlin',     city:'Berlin',     pc:'10557', addr:'Alt-Moabit 96',             lat:52.5200, lon:13.4050, tel:'030 3900 740',  tags:['Sales','Service','Works-certified'] },
+  { id:'lei', name:'ETK Partner Leipzig',    city:'Leipzig',    pc:'04179', addr:'Georg-Schumann-Straße 320', lat:51.3397, lon:12.3731, tel:'0341 4200 180', tags:['Sales','Service'] },
+  { id:'dre', name:'ETK Partner Dresden',    city:'Dresden',    pc:'01067', addr:'Ostra-Allee 16',            lat:51.0504, lon:13.7373, tel:'0351 4800 390', tags:['Service'] }
+];
+
+const km = (a, b) => {
+  const r = 6371, d = Math.PI / 180;
+  const dLat = (b.lat - a.lat) * d, dLon = (b.lon - a.lon) * d;
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * d) * Math.cos(b.lat * d) * Math.sin(dLon / 2) ** 2;
+  return 2 * r * Math.asin(Math.sqrt(h));
+};
+const fmtKm = (n) => (n < 10 ? n.toFixed(1).replace('.', ',') : String(Math.round(n))) + ' km';
+PARTNERS.forEach(p => { p.dist = km(REF, p); });
+PARTNERS.sort((a, b) => a.dist - b.dist);
+
+let selected = PARTNERS[0].id;
+let query = '';
+let tags = [];
+
+const listEl = document.getElementById('list');
+const countEl = document.getElementById('count');
+const wrap = document.getElementById('mapwrap');
+const svg = d3.select('#map');
+const gRoot = svg.append('g');
+const gGeo = gRoot.append('g');
+const gPins = gRoot.append('g');
+let projection, path, world, germany, zoom, k = 1;
+
+function shown(){
+  const q = query.trim().toLowerCase();
+  return PARTNERS.filter(p => {
+    const hitQ = !q || (p.name + ' ' + p.city + ' ' + p.pc + ' ' + p.addr).toLowerCase().includes(q);
+    const hitT = !tags.length || tags.every(t => p.tags.includes(t));
+    return hitQ && hitT;
+  });
+}
+
+function renderList(){
+  const list = shown();
+  countEl.textContent = list.length + (list.length === 1 ? ' partner' : ' partners') + ' · distances from 81241 München';
+  listEl.innerHTML = list.length ? list.map(p =>
+    '<div class="card" role="button" tabindex="0" data-id="' + p.id + '" aria-selected="' + (p.id === selected) + '">' +
+      '<span class="top"><span class="nm">' + p.name + '</span><span class="di">' + fmtKm(p.dist) + '</span></span>' +
+      '<span class="ad">' + p.addr + ', ' + p.pc + ' ' + p.city + '</span>' +
+      '<span class="tg">' + p.tags.map(t =>
+        '<span class="tag' + (t === 'Works-certified' ? ' works' : '') + '">' + t + '</span>').join('') +
+      '</span>' +
+    '</div>').join('') : '<div class="empty">No partner matches this search.</div>';
+  listEl.querySelectorAll('.card').forEach(c => {
+    c.addEventListener('click', () => select(c.dataset.id, true));
+    c.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Enter' || ev.key === ' '){ ev.preventDefault(); select(c.dataset.id, true); }
+    });
+  });
+}
+
+function drawGeo(){
+  const w = wrap.clientWidth, h = svg.node().clientHeight;
+  svg.attr('viewBox', '0 0 ' + w + ' ' + h);
+  projection = d3.geoMercator().fitExtent([[36, 34], [w - 36, h - 34]], germany);
+  path = d3.geoPath(projection);
+
+  gGeo.selectAll('*').remove();
+  gGeo.append('rect').attr('width', w).attr('height', h).attr('fill', '#fff');
+  gGeo.selectAll('path.c')
+    .data(world.filter(f => f.properties.name !== 'Germany'))
+    .join('path').attr('class', 'c').attr('d', path)
+    .attr('fill', '#f1f3f4').attr('stroke', '#fff').attr('stroke-width', 1);
+  gGeo.append('path').datum(germany).attr('d', path)
+    .attr('fill', '#e4e7ea').attr('stroke', '#a9aeb3').attr('stroke-width', 1);
+  drawPins();
+}
+
+function drawPins(){
+  const ids = new Set(shown().map(p => p.id));
+  const data = PARTNERS.filter(p => ids.has(p.id));
+  const sel = gPins.selectAll('g.pin').data(data, d => d.id);
+  sel.exit().remove();
+  const enter = sel.enter().append('g').attr('class', 'pin').style('cursor', 'pointer')
+    .on('click', (ev, d) => select(d.id, false));
+  enter.append('rect').attr('class', 'dot');
+  enter.append('text').attr('class', 'lbl');
+  const all = enter.merge(sel);
+  all.attr('transform', d => {
+    const c = projection([d.lon, d.lat]);
+    return 'translate(' + c[0] + ',' + c[1] + ')';
+  });
+  all.select('rect.dot')
+    .attr('x', d => (d.id === selected ? -7 : -5) / k)
+    .attr('y', d => (d.id === selected ? -7 : -5) / k)
+    .attr('width', d => (d.id === selected ? 14 : 10) / k)
+    .attr('height', d => (d.id === selected ? 14 : 10) / k)
+    .attr('fill', d => d.id === selected ? '#0066b1' : (d.tags.includes('Works-certified') ? '#4d8fc0' : '#3f4449'))
+    .attr('stroke', '#fff').attr('stroke-width', d => (d.id === selected ? 2.5 : 1.5) / k);
+  all.select('text.lbl')
+    .text(d => d.city)
+    .attr('x', 0).attr('y', -11 / k)
+    .attr('text-anchor', 'middle')
+    .attr('font-family', 'var(--font-core)')
+    .attr('font-size', 10 / k).attr('font-weight', 700)
+    .attr('letter-spacing', 1 / k)
+    .attr('fill', d => d.id === selected ? '#0066b1' : '#3f4449')
+    .attr('paint-order', 'stroke').attr('stroke', '#fff').attr('stroke-width', 3 / k);
+  placePopup();
+}
+
+let popEl = null;
+function placePopup(){
+  const p = PARTNERS.find(x => x.id === selected);
+  const visible = shown().some(x => x.id === selected);
+  if (popEl){ popEl.remove(); popEl = null; }
+  if (!p || !visible || !projection) return;
+  const t = d3.zoomTransform(svg.node());
+  const c = projection([p.lon, p.lat]);
+  const x = t.applyX(c[0]), y = t.applyY(c[1]);
+  popEl = document.createElement('div');
+  popEl.className = 'pop';
+  popEl.style.left = x + 'px';
+  popEl.style.top = (y - 16) + 'px';
+  popEl.innerHTML = '<div class="bar"></div><div class="nm">' + p.name + '</div>' +
+    '<div class="ad">' + p.addr + '<br>' + p.pc + ' ' + p.city + '</div>' +
+    '<div class="ph">' + p.tel + '</div>';
+  wrap.appendChild(popEl);
+}
+
+function select(id, fly){
+  selected = id;
+  listEl.querySelectorAll('.card').forEach(c =>
+    c.setAttribute('aria-selected', String(c.dataset.id === id)));
+  const p = PARTNERS.find(x => x.id === id);
+  if (fly && p && projection){
+    const c = projection([p.lon, p.lat]);
+    const w = wrap.clientWidth, h = svg.node().clientHeight;
+    const target = 2.4;
+    svg.transition().duration(700).call(
+      zoom.transform,
+      d3.zoomIdentity.translate(w / 2, h / 2).scale(target).translate(-c[0], -c[1])
+    );
+  } else {
+    drawPins();
+  }
+}
+
+document.getElementById('q').addEventListener('input', (e) => {
+  query = e.target.value; renderList(); drawPins();
+});
+document.querySelectorAll('.chip').forEach(ch => ch.addEventListener('click', () => {
+  const t = ch.dataset.tag, i = tags.indexOf(t);
+  if (i > -1) tags.splice(i, 1); else tags.push(t);
+  ch.setAttribute('aria-pressed', String(tags.includes(t)));
+  renderList(); drawPins();
+}));
+
+renderList();
+
+d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/countries-110m.json').then(topo => {
+  world = topojson.feature(topo, topo.objects.countries).features;
+  germany = world.find(f => f.properties.name === 'Germany');
+
+  zoom = d3.zoom().scaleExtent([1, 14]).on('zoom', (ev) => {
+    k = ev.transform.k;
+    gRoot.attr('transform', ev.transform);
+    drawPins();
+  });
+  svg.call(zoom);
+
+  drawGeo();
+  document.getElementById('zin').addEventListener('click', () => svg.transition().duration(260).call(zoom.scaleBy, 1.7));
+  document.getElementById('zout').addEventListener('click', () => svg.transition().duration(260).call(zoom.scaleBy, 1 / 1.7));
+  document.getElementById('zreset').addEventListener('click', () => svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity));
+  addEventListener('resize', () => { drawGeo(); });
+}).catch(err => {
+  wrap.insertAdjacentHTML('beforeend',
+    '<div class="empty" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">The map could not be loaded.</div>');
+  console.error(err);
+});
+</script>
+</body>
+</html>
